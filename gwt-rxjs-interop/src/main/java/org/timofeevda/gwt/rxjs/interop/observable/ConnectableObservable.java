@@ -5,7 +5,7 @@ import org.timofeevda.gwt.rxjs.interop.subscription.Subscription;
 
 /**
  *
- * @author timof
+ * @author dtimofeev since 21.12.2016.
  */
 @JsType(namespace = "Rx", isNative = true)
 public class ConnectableObservable<T> extends Observable<T> {

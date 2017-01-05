@@ -1,6 +1,5 @@
 package org.timofeevda.gwt.rxjs.interop.observable;
 
-import java.util.Date;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;

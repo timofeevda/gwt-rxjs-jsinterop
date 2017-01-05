@@ -1,3 +1,5 @@
+/* global testsContainer, expect */
+
 describe("Observables", function() {
     beforeEach(function(done) {
         var check = function() {
@@ -6,7 +8,7 @@ describe("Observables", function() {
             } else {
                 setTimeout(check, 200);
             }
-        }
+        };
         setTimeout(check, 200);
     });
 
@@ -144,4 +146,4 @@ describe("Observables", function() {
         expect(testsContainer.partition()).toBe("1");
         done();
     });
-})
+});

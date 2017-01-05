@@ -5,7 +5,8 @@ import jsinterop.annotations.JsType;
 
 /**
  *
- * @author timof
+ * @author dtimofeev since 21.12.2016.
+ * @param <T>
  */
 @JsType(namespace="Rx")
 public class Timestamp<T> {
