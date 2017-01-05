@@ -12,4 +12,8 @@ public class Scheduler {
     public static Scheduler async;
     @JsProperty
     public static Scheduler asap;
+    @JsProperty
+    public static Scheduler queue;
+    @JsProperty
+    public static Scheduler animationFrame;
 }

@@ -3,7 +3,10 @@ package tests;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.timofeevda.gwt.rxjs.interop.functions.Action0;
 import org.timofeevda.gwt.rxjs.interop.observable.Observable;
+import org.timofeevda.gwt.rxjs.interop.scheduler.Scheduler;
+import org.timofeevda.gwt.rxjs.interop.subscription.Subscription;
 
 /**
  * @author dtimofeev since 21.12.2016.
@@ -26,15 +29,15 @@ class TestsContainer {
     @JsProperty
     public int x = 10;
 
-    @JsMethod(name = "plain")
-    public boolean testPlainNotification() {
+    @JsMethod(name = "of")
+    public boolean testOf() {
         final BooleanHolder bh = new BooleanHolder();
         Observable.of(true).subscribe(aBoolean -> bh.value = aBoolean);
         return bh.value;
     }
     
-    @JsMethod(name = "plainFrom")
-    public String testPlainFrom() {
+    @JsMethod(name = "from")
+    public String testFrom() {
         final StringHolder bh = new StringHolder();
         Observable.from(new String[]{"3", "4", "7"}).subscribe(aBoolean -> bh.value = aBoolean);
         return bh.value;
@@ -60,6 +63,13 @@ class TestsContainer {
         Observable.merge(Observable.of("1"), Observable.of("2")).subscribe(v -> sh.value += v);
         return sh.value;
     }
+    
+    @JsMethod(name = "defer")
+    public String testDefer() {
+        final StringHolder sh = new StringHolder();
+        Observable.defer(() -> Observable.of("1")).subscribe(v -> sh.value += v);
+        return sh.value;
+    }
 
     @JsMethod(name = "race")
     public String testRace() {
@@ -73,6 +83,27 @@ class TestsContainer {
         final StringHolder sh = new StringHolder();
         Observable.of("1")._do(v -> sh.value += v).subscribe(v -> {});
         return sh.value;
+    }
+      
+    @JsMethod(name = "empty")
+    public String testEmpty() {
+        final StringHolder sh = new StringHolder();
+        Observable.of(1, 2, 3, 4).mergeMap((Integer item, int index) -> item % 2 == 0 ? Observable.of("1") : Observable.<String>empty()).subscribe(v -> sh.value += v);
+        return sh.value;
+    }
+    
+    @JsMethod(name = "ifThen")
+    public boolean testIfThen() {
+        BooleanHolder bh = new BooleanHolder();
+        Observable._if(() -> true, Observable.of(true)).subscribe(v -> bh.value = v);
+        return bh.value;
+    }
+    
+    @JsMethod(name = "ifElse")
+    public boolean testIfElse() {
+        BooleanHolder bh = new BooleanHolder();
+        Observable._if(() -> false, Observable.of(true), Observable.of(false)).subscribe(v -> bh.value = v);
+        return bh.value;
     }
 
     @JsMethod(name = "elementAt")
@@ -215,4 +246,16 @@ class TestsContainer {
         obs[1].subscribe(v -> sh.value += v);
         return sh.value;
     }
+    
+    @JsMethod(name = "asyncScheduler")
+    public void testAsyncScheduler(Action0 jasmineDone) {
+        Observable.of("1").observeOn(Scheduler.async).subscribe(v -> jasmineDone.call());
+    }
+    
+    @JsMethod(name = "interval")
+    public void testInterval(Action0 jasmineDone) {
+        Subscription subscription = Observable.interval(200).subscribe(v -> jasmineDone.call());
+        Observable.timer(400).subscribe(v -> subscription.unsubscribe());
+    }
+    
 }

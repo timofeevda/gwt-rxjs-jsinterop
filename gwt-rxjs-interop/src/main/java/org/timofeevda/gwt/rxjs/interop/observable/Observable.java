@@ -11,6 +11,7 @@ import org.timofeevda.gwt.rxjs.interop.functions.Func2;
 import org.timofeevda.gwt.rxjs.interop.functions.Func3;
 import org.timofeevda.gwt.rxjs.interop.functions.Func4;
 import org.timofeevda.gwt.rxjs.interop.functions.FuncN;
+import org.timofeevda.gwt.rxjs.interop.functions.Producer;
 import org.timofeevda.gwt.rxjs.interop.scheduler.Scheduler;
 import org.timofeevda.gwt.rxjs.interop.subscription.Subscription;
 
@@ -22,10 +23,8 @@ import org.timofeevda.gwt.rxjs.interop.subscription.Subscription;
 public class Observable<T> {
 
     public native static <T> Observable<T> of(T... args);
-    
+
     public native static <T> Observable<T> from(T[] args);
-    
-//    public native static <T> Observable<T> from(Iterable<T> args);
 
     public native static <T> Observable<T> create(OnSubscribe<T> onSubscribe);
 
@@ -73,7 +72,7 @@ public class Observable<T> {
 
     public native Observable<T> concat(Observable<? extends T> v1);
 
-    public native static <T> Observable<T> concatAll();
+    public native <T> Observable<T> concatAll();
 
     public native static <T> Observable<T> concat(Observable<? extends T> v1, Observable<? extends T> v2);
 
@@ -101,6 +100,8 @@ public class Observable<T> {
 
     public native <R> Observable<R> defaultIfEmpty(R defaultValue);
 
+    public native static <T> Observable<T> defer(Producer<Observable<T>> producer);
+
     public native Observable<T> delay(int initialDelay);
 
     public native Observable<T> delayWhen(Func1<T, Observable<?>> delayDurationSelector);
@@ -127,6 +128,8 @@ public class Observable<T> {
 
     @JsMethod(name = "do")
     public native <R> Observable<R> _do(Observer<T> observer);
+
+    public native static <T> Observable<T> empty();
 
     public native Observable<T> elementAt(int index);
 
@@ -168,6 +171,19 @@ public class Observable<T> {
     public native Observable<T> ignoreElements();
 
     public native Observable<Boolean> isEmpty();
+
+    @JsMethod(name = "if")
+    public native static Observable<Boolean> _if(Producer<Boolean> condition);
+    
+    @JsMethod(name = "if")
+    public native static <T> Observable<Boolean> _if(Producer<Boolean> condition, Observable<T> thenSource);
+    
+    @JsMethod(name = "if")
+    public native static <T> Observable<Boolean> _if(Producer<Boolean> condition, Observable<T> thenSource, Observable<T> elseSource);
+    
+    public native static Observable<Integer> interval(int period);
+    
+    public native static Observable<Integer> interval(int period, Scheduler scheduler);
 
     public native Observable<T> last(Predicate<T> predicate);
 
@@ -227,9 +243,9 @@ public class Observable<T> {
 
     public native static <T> Observable<T> multicast(SubjectFactory<T> subjectFactory, Selector<T> selector);
 
-    public native <R> Observable<R> observeOn(Scheduler scheduler);
+    public native Observable<T> observeOn(Scheduler scheduler);
 
-    public native <R> Observable<R> observeOn(Scheduler scheduler, int delay);
+    public native Observable<T> observeOn(Scheduler scheduler, int delay);
 
     public native Observable<T> onErrorResumeNext(Observable<? extends T> inputObservable);
 
@@ -354,8 +370,6 @@ public class Observable<T> {
 
     public native Observable<T> takeWhile(Observable notifier);
 
-    public native static Observable<Void> timer(int initialDelay);
-
     public native Observable<T> throttle(Func1<T, Observable<?>> durationSelector);
 
     public native Observable<T> throttleTime(int duration);
@@ -373,6 +387,12 @@ public class Observable<T> {
     public native Observable<T> timeoutWith(int due, Observable<T> withObservable);
 
     public native Observable<T> timeoutWith(int due, Observable<T> withObservable, Scheduler scheduler);
+    
+    public native static Observable<Integer> timer(int initialDelay);
+    
+    public native static Observable<Integer> timer(int initialDelay, int period);
+    
+    public native static Observable<Integer> timer(int initialDelay, int period, Scheduler scheduler);
 
     public native Observable<Timestamp<T>> timestamp();
 
