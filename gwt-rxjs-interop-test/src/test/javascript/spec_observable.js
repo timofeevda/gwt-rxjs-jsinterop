@@ -175,6 +175,11 @@ describe("Observable operators", function () {
         expect(testsContainer.range()).toBe("123");
         done();
     });
+    
+    it("must provide \"throw\" functionality", function (done) {
+        expect(testsContainer.throw()).toBe("1");
+        done();
+    });
 });
 
 describe("Schedulers", function () {

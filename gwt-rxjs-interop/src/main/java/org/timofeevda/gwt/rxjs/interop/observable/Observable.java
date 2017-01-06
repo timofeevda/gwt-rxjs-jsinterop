@@ -136,6 +136,12 @@ public class Observable<T> {
     public native Observable<T> elementAt(int index, T defaultValue);
 
     public native Observable<Boolean> every(CountPredicate<T> predicate);
+    
+    @JsMethod(name = "throw")
+    public native static Observable _throw(Object error);
+    
+    @JsMethod(name = "throw")
+    public native static Observable _throw(Object error, Scheduler scheduler);
 
     public native Observable<T> exhaust();
 
