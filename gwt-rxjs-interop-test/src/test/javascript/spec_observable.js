@@ -71,112 +71,112 @@ describe("Observable operators", function () {
         done();
     });
 
-    it("must provide \"elementAt\" functionality ", function (done) {
+    it("must provide \"elementAt\"", function (done) {
         expect(testsContainer.elementAt()).toBe("3");
         done();
     });
 
-    it("must provide \"elementAtDefault\" functionality ", function (done) {
+    it("must provide \"elementAtDefault\"", function (done) {
         expect(testsContainer.elementAtDefault()).toBe("-1");
         done();
     });
 
-    it("must provide \"every\" functionality ", function (done) {
+    it("must provide \"every\"", function (done) {
         expect(testsContainer.every()).toBeTruthy();
         done();
     });
 
-    it("must provide \"exhaust\" functionality ", function (done) {
+    it("must provide \"exhaust\"", function (done) {
         expect(testsContainer.exhaust()).toBe("123");
         done();
     });
 
-    it("must provide \"exhaustMap\" functionality ", function (done) {
+    it("must provide \"exhaustMap\"", function (done) {
         expect(testsContainer.exhaustMap()).toBe("102030");
         done();
     });
 
-    it("must provide \"take\" functionality ", function (done) {
+    it("must provide \"take\"", function (done) {
         expect(testsContainer.take()).toBe("12");
         done();
     });
 
-    it("must provide \"expand\" functionality ", function (done) {
+    it("must provide \"expand\"", function (done) {
         expect(testsContainer.expand()).toBe("110100");
         done();
     });
 
-    it("must provide \"finally\" functionality ", function (done) {
+    it("must provide \"finally\"", function (done) {
         expect(testsContainer.finally()).toBe("finally");
         done();
     });
 
-    it("must provide \"find\" functionality ", function (done) {
+    it("must provide \"find\"", function (done) {
         expect(testsContainer.find()).toBe("1");
         done();
     });
 
-    it("must provide \"findIndex\" functionality ", function (done) {
+    it("must provide \"findIndex\"", function (done) {
         expect(testsContainer.findIndex()).toBe("1");
         done();
     });
 
-    it("must provide \"first\" functionality", function (done) {
+    it("must provide \"first\"", function (done) {
         expect(testsContainer.first()).toBe("2");
         done();
     });
 
-    it("must provide \"groupBy\" functionality", function (done) {
+    it("must provide \"groupBy\"", function (done) {
         expect(testsContainer.groupBy()).toBe("312");
         done();
     });
 
-    it("must provide \"ignoreElements\" functionality", function (done) {
+    it("must provide \"ignoreElements\"", function (done) {
         expect(testsContainer.ignoreElements()).toBe("");
         done();
     });
 
-    it("must provide \"last\" functionality", function (done) {
+    it("must provide \"last\"", function (done) {
         expect(testsContainer.last()).toBe("1");
         done();
     });
 
-    it("must provide \"mapTo\" functionality", function (done) {
+    it("must provide \"mapTo\"", function (done) {
         expect(testsContainer.mapTo()).toBe("55555");
         done();
     });
 
-    it("must provide \"max\" functionality", function (done) {
+    it("must provide \"max\"", function (done) {
         expect(testsContainer.max()).toBe("8");
         done();
     });
 
-    it("must provide \"maxComparer\" functionality", function (done) {
+    it("must provide \"maxComparer\"", function (done) {
         expect(testsContainer.maxComparer()).toBe("12");
         done();
     });
 
-    it("must provide \"mergeAll\" functionality", function (done) {
+    it("must provide \"mergeAll\"", function (done) {
         expect(testsContainer.mergeAll()).toBe("13");
         done();
     });
 
-    it("must provide \"pairwise\" functionality", function (done) {
+    it("must provide \"pairwise\"", function (done) {
         expect(testsContainer.pairwise()).toBe("13");
         done();
     });
 
-    it("must provide \"partition\" functionality", function (done) {
+    it("must provide \"partition\"", function (done) {
         expect(testsContainer.partition()).toBe("1");
         done();
     });
     
-    it("must provide \"range\" functionality", function (done) {
+    it("must provide \"range\"", function (done) {
         expect(testsContainer.range()).toBe("123");
         done();
     });
     
-    it("must provide \"throw\" functionality", function (done) {
+    it("must provide \"throw\"", function (done) {
         expect(testsContainer.throw()).toBe("1");
         done();
     });

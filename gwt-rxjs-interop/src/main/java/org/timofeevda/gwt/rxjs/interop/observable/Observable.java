@@ -248,6 +248,8 @@ public class Observable<T> {
     public native static <T> Observable<T> multicast(SubjectFactory<T> subjectFactory);
 
     public native static <T> Observable<T> multicast(SubjectFactory<T> subjectFactory, Selector<T> selector);
+    
+    public native static <T> Observable<T> never();
 
     public native Observable<T> observeOn(Scheduler scheduler);
 
