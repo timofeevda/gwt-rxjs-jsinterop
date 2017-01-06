@@ -160,7 +160,7 @@ describe("Observable operators", function () {
         expect(testsContainer.mergeAll()).toBe("13");
         done();
     });
-
+    
     it("must provide \"pairwise\"", function (done) {
         expect(testsContainer.pairwise()).toBe("13");
         done();

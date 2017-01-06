@@ -248,19 +248,19 @@ class TestsContainer {
     }
     
     @JsMethod(name = "range")
-    public String testRange(Action0 jasmineDone) {
+    public String testRange() {
         final StringHolder sh = new StringHolder();
         Observable.range(1,3).subscribe(v -> sh.value += v);
         return sh.value;
     }
     
     @JsMethod(name = "throw")
-    public String testThrow(Action0 jasmineDone) {
+    public String testThrow() {
         final StringHolder sh = new StringHolder();
         Observable._throw(1).subscribe(v -> {}, v -> sh.value += v, () -> {});
         return sh.value;
     }
-    
+        
     @JsMethod(name = "asyncScheduler")
     public void testAsyncScheduler(Action0 jasmineDone) {
         Observable.of("1").observeOn(Scheduler.async).subscribe(v -> jasmineDone.call());

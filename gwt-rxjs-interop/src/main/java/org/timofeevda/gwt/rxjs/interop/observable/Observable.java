@@ -10,10 +10,13 @@ import org.timofeevda.gwt.rxjs.interop.functions.Func1;
 import org.timofeevda.gwt.rxjs.interop.functions.Func2;
 import org.timofeevda.gwt.rxjs.interop.functions.Func3;
 import org.timofeevda.gwt.rxjs.interop.functions.Func4;
+import org.timofeevda.gwt.rxjs.interop.functions.Func5;
+import org.timofeevda.gwt.rxjs.interop.functions.Func6;
 import org.timofeevda.gwt.rxjs.interop.functions.FuncN;
 import org.timofeevda.gwt.rxjs.interop.functions.Producer;
 import org.timofeevda.gwt.rxjs.interop.scheduler.Scheduler;
 import org.timofeevda.gwt.rxjs.interop.subscription.Subscription;
+import org.timofeevda.gwt.rxjs.interop.functions.ProjectWithArray;
 
 /**
  * @author dtimofeev since 20.12.2016.
@@ -136,10 +139,10 @@ public class Observable<T> {
     public native Observable<T> elementAt(int index, T defaultValue);
 
     public native Observable<Boolean> every(CountPredicate<T> predicate);
-    
+
     @JsMethod(name = "throw")
     public native static Observable _throw(Object error);
-    
+
     @JsMethod(name = "throw")
     public native static Observable _throw(Object error, Scheduler scheduler);
 
@@ -180,15 +183,15 @@ public class Observable<T> {
 
     @JsMethod(name = "if")
     public native static Observable<Boolean> _if(Producer<Boolean> condition);
-    
+
     @JsMethod(name = "if")
     public native static <T> Observable<Boolean> _if(Producer<Boolean> condition, Observable<T> thenSource);
-    
+
     @JsMethod(name = "if")
     public native static <T> Observable<Boolean> _if(Producer<Boolean> condition, Observable<T> thenSource, Observable<T> elseSource);
-    
+
     public native static Observable<Integer> interval(int period);
-    
+
     public native static Observable<Integer> interval(int period, Scheduler scheduler);
 
     public native Observable<T> last(Predicate<T> predicate);
@@ -248,7 +251,7 @@ public class Observable<T> {
     public native static <T> Observable<T> multicast(SubjectFactory<T> subjectFactory);
 
     public native static <T> Observable<T> multicast(SubjectFactory<T> subjectFactory, Selector<T> selector);
-    
+
     public native static <T> Observable<T> never();
 
     public native Observable<T> observeOn(Scheduler scheduler);
@@ -266,6 +269,8 @@ public class Observable<T> {
     public native Observable<T> onErrorResumeNext(Observable<? extends T> v1, Observable<? extends T> v2, Observable<? extends T> v3, Observable<? extends T> v4, Observable<? extends T> v5);
 
     public native Observable<T> onErrorResumeNext(Observable<? extends T> v1, Observable<? extends T> v2, Observable<? extends T> v3, Observable<? extends T> v4, Observable<? extends T> v5, Observable<? extends T> v6);
+
+    public native static Observable<Object[]> pairs(Object o);
 
     public native Observable<T[]> pairwise();
 
@@ -288,9 +293,9 @@ public class Observable<T> {
     public native ConnectableObservable<T> publishReplay(int bufferSize, int windowTime, Scheduler scheduler);
 
     public native static <T> Observable<T> race(Observable<? extends T> v1, Observable<? extends T> v2);
-    
+
     public native static Observable<Integer> range(int start, int count);
-    
+
     public native static Observable<Integer> range(int start, int count, Scheduler scheduler);
 
     public native Observable<T> reduce(Accumulator<T> accumulator);
@@ -399,11 +404,11 @@ public class Observable<T> {
     public native Observable<T> timeoutWith(int due, Observable<T> withObservable);
 
     public native Observable<T> timeoutWith(int due, Observable<T> withObservable, Scheduler scheduler);
-    
+
     public native static Observable<Integer> timer(int initialDelay);
-    
+
     public native static Observable<Integer> timer(int initialDelay, int period);
-    
+
     public native static Observable<Integer> timer(int initialDelay, int period, Scheduler scheduler);
 
     public native Observable<Timestamp<T>> timestamp();
@@ -439,16 +444,58 @@ public class Observable<T> {
             Observable<? extends T2> v2, Observable<? extends T3> v3, Observable<? extends T4> v4,
             Func4<? super T1, ? super T2, ? super T3, ? super T4, ? extends R> combineFunction);
 
+    public native <R> Observable<R> zip(Func1<? super T, ? extends R> projectFunction);
+
+    public native <T2, R> Observable<R> zip(Observable<? extends T2> v2,
+            Func2<? super T, ? super T2, ? extends R> projectFunction);
+
+    public native <T2, T3, R> Observable<R> zip(Observable<? extends T2> v2, Observable<? extends T3> v3,
+            Func3<? super T, ? super T2, ? super T3, ? extends R> projectFunction);
+
+    public native <T2, T3, T4, R> Observable<R> zip(
+            Observable<? extends T2> v2, Observable<? extends T3> v3, Observable<? extends T4> v4,
+            Func4<? super T, ? super T2, ? super T3, ? super T4, ? extends R> projectFunction);
+
+    public native <T2, T3, T4, T5, R> Observable<R> zip(
+            Observable<? extends T2> v2, Observable<? extends T3> v3, Observable<? extends T4> v4, Observable<? extends T5> v5,
+            Func5<? super T, ? super T2, ? super T3, ? super T4, ? super T5, ? extends R> projectFunction);
+
+    public native <T2, T3, T4, T5, T6, R> Observable<R> zip(
+            Observable<? extends T2> v2, Observable<? extends T3> v3, Observable<? extends T4> v4, Observable<? extends T5> v5, Observable<? extends T6> v6,
+            Func6<? super T, ? super T2, ? super T3, ? super T4, ? super T5, ? super T6, ? extends R> projectFunction);
+    
+    public native <T2> Observable<T[]> zip(Observable<? extends T2> v2);
+
+    public native <T2, T3> Observable<T[]> zip(Observable<? extends T2> v2, Observable<? extends T3> v3);
+
+    public native <T2, T3, T4> Observable<T[]> zip(Observable<? extends T2> v2, Observable<? extends T3> v3, Observable<? extends T4> v4);
+
+    public native <T2, T3, T4, T5> Observable<T[]> zip(Observable<? extends T2> v2, Observable<? extends T3> v3, Observable<? extends T4> v4, Observable<? extends T5> v5);
+
+    public native <T2, T3, T4, T5, T6> Observable<T[]> zip(Observable<? extends T2> v2, Observable<? extends T3> v3, Observable<? extends T4> v4, Observable<? extends T5> v5, Observable<? extends T6> v6);
+    
+    public native static Observable<T[]> zip(Observable<? extends T>[] values);
+        
     public native static <T1, T2, R> Observable<R> zip(Observable<? extends T1> v1, Observable<? extends T2> v2,
-            Func2<? super T1, ? super T2, ? extends R> combineFunction);
+            Func2<? super T1, ? super T2, ? extends R> projectFunction);
 
     public native static <T1, T2, T3, R> Observable<R> zip(Observable<? extends T1> v1,
             Observable<? extends T2> v2, Observable<? extends T3> v3,
-            Func3<? super T1, ? super T2, ? super T3, ? extends R> combineFunction);
+            Func3<? super T1, ? super T2, ? super T3, ? extends R> projectFunction);
 
     public native static <T1, T2, T3, T4, R> Observable<R> zip(Observable<? extends T1> v1,
             Observable<? extends T2> v2, Observable<? extends T3> v3, Observable<? extends T4> v4,
-            Func4<? super T1, ? super T2, ? super T3, ? super T4, ? extends R> combineFunction);
+            Func4<? super T1, ? super T2, ? super T3, ? super T4, ? extends R> projectFunction);
+
+    public native static <T1, T2, T3, T4, T5, R> Observable<R> zip(Observable<? extends T1> v1,
+            Observable<? extends T2> v2, Observable<? extends T3> v3, Observable<? extends T4> v4, Observable<? extends T5> v5,
+            Func5<? super T1, ? super T2, ? super T3, ? super T4, ? super T5, ? extends R> projectFunction);
+
+    public native static <T1, T2, T3, T4, T5, T6, R> Observable<R> zip(Observable<? extends T1> v1,
+            Observable<? extends T2> v2, Observable<? extends T3> v3, Observable<? extends T4> v4, Observable<? extends T5> v5, Observable<? extends T6> v6,
+            Func6<? super T1, ? super T2, ? super T3, ? super T4, ? super T5, ? super T6, ? extends R> projectFunction);
+    
+    public native static <T,R> Observable<R> zip(Observable<? extends T>[] values, ProjectWithArray<? extends T, R> projectFunction);
 
     public native Observable<T> zipAll();
 
