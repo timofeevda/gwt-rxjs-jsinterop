@@ -5,18 +5,18 @@
 
     <parent>
         <groupId>com.github.timofeevda</groupId>
-        <artifactId>gwt-rxjs-interop-parent</artifactId>
+        <artifactId>gwt-rxjs-jsinterop-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>gwt-rxjs-interop-test</artifactId>
+    <artifactId>gwt-rxjs-jsinterop-test</artifactId>
 
     <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
             <groupId>com.github.timofeevda</groupId>
-            <artifactId>gwt-rxjs-interop</artifactId>
+            <artifactId>gwt-rxjs-jsinterop</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
@@ -72,7 +72,7 @@
                                     <goal>copy-resources</goal>
                                 </goals>
                                 <configuration>
-                                    <outputDirectory>${basedir}/target/gwt-rxjs-interop-test-1.0.0-SNAPSHOT/parent/</outputDirectory>
+                                    <outputDirectory>${basedir}/target/${project.build.finalName}/parent/</outputDirectory>
                                     <resources>
                                         <resource>
                                             <directory>src/test/javascript</directory>
@@ -104,7 +104,7 @@
                                 </capability>
                             </webDriverCapabilities>
                             <jsSrcDir>${basedir}/src/main/resources/static/app</jsSrcDir>
-                            <jsTestSrcDir>${basedir}/target/gwt-rxjs-interop-test-1.0.0-SNAPSHOT/parent</jsTestSrcDir>
+                            <jsTestSrcDir>${basedir}/target/${project.build.finalName}/parent</jsTestSrcDir>
                             <specIncludes>
                                 <include>parent.nocache.js</include>
                                 <include>**/spec*.js</include>
@@ -164,7 +164,7 @@
                                     <goal>copy-resources</goal>
                                 </goals>
                                 <configuration>
-                                    <outputDirectory>${basedir}/target/gwt-rxjs-interop-test-1.0.0-SNAPSHOT/parent/</outputDirectory>
+                                    <outputDirectory>${basedir}/target/${project.build.finalName}/parent/</outputDirectory>
                                     <resources>
                                         <resource>
                                             <directory>src/test/javascript</directory>
@@ -211,7 +211,7 @@
                                 </capability>
                             </webDriverCapabilities>
                             <jsSrcDir>${basedir}/src/main/resources/static/app</jsSrcDir>
-                            <jsTestSrcDir>${basedir}/target/gwt-rxjs-interop-test-1.0.0-SNAPSHOT/parent</jsTestSrcDir>
+                            <jsTestSrcDir>${basedir}/target/${project.build.finalName}/parent</jsTestSrcDir>
                             <specIncludes>
                                 <include>parent.nocache.js</include>
                                 <include>**/spec*.js</include>

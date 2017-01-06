@@ -3,14 +3,14 @@
     <modelVersion>4.0.0</modelVersion>
 	
     <groupId>com.github.timofeevda</groupId>
-    <artifactId>gwt-rxjs-interop-parent</artifactId>
+    <artifactId>gwt-rxjs-jsinterop-parent</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 		
     <packaging>pom</packaging>
 
     <modules>
-        <module>gwt-rxjs-interop</module>
-        <module>gwt-rxjs-interop-test</module>
+        <module>gwt-rxjs-jsinterop</module>
+        <module>gwt-rxjs-jsinterop-test</module>
     </modules>
 	
     <properties>
