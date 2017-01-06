@@ -280,6 +280,10 @@ public class Observable<T> {
     public native ConnectableObservable<T> publishReplay(int bufferSize, int windowTime, Scheduler scheduler);
 
     public native static <T> Observable<T> race(Observable<? extends T> v1, Observable<? extends T> v2);
+    
+    public native static Observable<Integer> range(int start, int count);
+    
+    public native static Observable<Integer> range(int start, int count, Scheduler scheduler);
 
     public native Observable<T> reduce(Accumulator<T> accumulator);
 

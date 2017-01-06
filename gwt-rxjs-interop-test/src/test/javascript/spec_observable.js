@@ -170,6 +170,11 @@ describe("Observable operators", function () {
         expect(testsContainer.partition()).toBe("1");
         done();
     });
+    
+    it("must provide \"range\" functionality", function (done) {
+        expect(testsContainer.range()).toBe("123");
+        done();
+    });
 });
 
 describe("Schedulers", function () {
