@@ -474,7 +474,7 @@ public class Observable<T> {
 
     public native <T2, T3, T4, T5, T6> Observable<T[]> zip(Observable<? extends T2> v2, Observable<? extends T3> v3, Observable<? extends T4> v4, Observable<? extends T5> v5, Observable<? extends T6> v6);
     
-    public native static Observable<T[]> zip(Observable<? extends T>[] values);
+    public native static <T> Observable<T[]> zip(Observable<? extends T>[] values);
         
     public native static <T1, T2, R> Observable<R> zip(Observable<? extends T1> v1, Observable<? extends T2> v2,
             Func2<? super T1, ? super T2, ? extends R> projectFunction);
