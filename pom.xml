@@ -8,6 +8,8 @@
 		
     <packaging>pom</packaging>
 
+    <name>GWT RxJs JsInterop</name>
+
     <modules>
         <module>gwt-rxjs-jsinterop</module>
         <module>gwt-rxjs-jsinterop-test</module>
