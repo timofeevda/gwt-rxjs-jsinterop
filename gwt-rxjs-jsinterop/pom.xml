@@ -11,6 +11,9 @@
 
     <artifactId>gwt-rxjs-jsinterop</artifactId>
     
+    <name>GWT RxJs JsInterop</name>
+    <url>https://github.com/timofeevda/gwt-rxjs-jsinterop</url>
+    
     <packaging>jar</packaging>
     
     <build>        

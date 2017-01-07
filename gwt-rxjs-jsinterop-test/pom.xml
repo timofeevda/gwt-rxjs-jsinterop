@@ -12,6 +12,9 @@
     <artifactId>gwt-rxjs-jsinterop-test</artifactId>
 
     <packaging>jar</packaging>
+    
+    <name>GWT RxJs JsInterop Test</name>
+    <url>https://github.com/timofeevda/gwt-rxjs-jsinterop</url>
 
     <dependencies>
         <dependency>

@@ -8,9 +8,13 @@
 		
     <packaging>pom</packaging>
         
-    <name>GWT RxJs JsInterop</name>
+    <name>GWT RxJs JsInterop Parent</name>
     <url>https://github.com/timofeevda/gwt-rxjs-jsinterop</url>
     <description>RxJS JavaScript interoperability bindings for GWT 2.8</description>
+    
+    <prerequisites>
+        <maven>3.1.0</maven>
+    </prerequisites>
        	
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -46,10 +50,23 @@
         <system>GitHub Issues</system>
     </issueManagement>
     
+    <ciManagement>
+        <system>travis-ci</system>
+        <url>https://travis-ci.org/timofeevda/gwt-rxjs-jsinterop</url>
+    </ciManagement>
+    
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+    
     <scm>
         <url>https://github.com/timofeevda/gwt-rxjs-jsinterop</url>
         <connection>scm:git:git://github.com:timofeevda/gwt-rxjs-jsinterop.git</connection>
         <developerConnection>scm:git:[fetch=]git://github.com:timofeevda/gwt-rxjs-jsinterop.git[push=]ssh://github.com:timofeevda/gwt-rxjs-jsinterop.git</developerConnection>
+        <tag>HEAD</tag>
     </scm>
     
     <profiles>
