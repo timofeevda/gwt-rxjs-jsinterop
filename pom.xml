@@ -64,8 +64,8 @@
     
     <scm>
         <url>https://github.com/timofeevda/gwt-rxjs-jsinterop</url>
-        <connection>scm:git:git://github.com:timofeevda/gwt-rxjs-jsinterop.git</connection>
-        <developerConnection>scm:git:git://github.com:timofeevda/gwt-rxjs-jsinterop.git</developerConnection>
+        <connection>scm:git:git@github.com:timofeevda/gwt-rxjs-jsinterop.git</connection>
+        <developerConnection>scm:git:git@github.com:timofeevda/gwt-rxjs-jsinterop.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
     
