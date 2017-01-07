@@ -10,9 +10,9 @@
     </parent>
 
     <artifactId>gwt-rxjs-jsinterop</artifactId>
-
+    
     <packaging>jar</packaging>
-
+    
     <dependencies>
         <dependency>
             <groupId>com.google.jsinterop</groupId>
