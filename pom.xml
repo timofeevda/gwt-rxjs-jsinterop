@@ -11,12 +11,7 @@
     <name>GWT RxJs JsInterop</name>
     <url>https://github.com/timofeevda/gwt-rxjs-jsinterop</url>
     <description>RxJS JavaScript interoperability bindings for GWT 2.8</description>
-           
-    <modules>
-        <module>gwt-rxjs-jsinterop</module>
-        <module>gwt-rxjs-jsinterop-test</module>
-    </modules>
-	
+       	
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -35,7 +30,7 @@
             <comments>A business-friendly OSS license</comments>
         </license>
     </licenses>
-    
+        
     <developers>
         <developer>
             <id>timofeevda</id>
@@ -56,5 +51,208 @@
         <connection>scm:git:git://github.com:timofeevda/gwt-rxjs-jsinterop.git</connection>
         <developerConnection>scm:git:[fetch=]git://github.com:timofeevda/gwt-rxjs-jsinterop.git[push=]ssh://github.com:timofeevda/gwt-rxjs-jsinterop.git</developerConnection>
     </scm>
+    
+    <profiles>
+        <profile>
+            <id>develop</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <modules>
+                <module>gwt-rxjs-jsinterop</module>
+                <module>gwt-rxjs-jsinterop-test</module>
+            </modules>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                    </plugin>                    
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>release</id>
+            <modules>
+                <module>gwt-rxjs-jsinterop</module>
+            </modules>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+    
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.3</version>
+                    <configuration>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>gwt-maven-plugin</artifactId>
+                    <version>${gwt.version}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>compile</goal>
+                            </goals>
+                            <phase>test</phase>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <generateJsInteropExports>true</generateJsInteropExports>
+                        <draftCompile>true</draftCompile>
+                        <noServer>true</noServer>
+                        <style>PRETTY</style>
+                        <optimizationLevel>0</optimizationLevel>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>3.0.1</version>
+                    <executions>
+                        <execution>
+                            <id>attach-sources</id>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin> 
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>2.10.4</version>
+                    <executions>
+                        <execution>
+                            <id>attach-javadocs</id>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <additionalparam>-Xdoclint:none</additionalparam>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-gpg-plugin</artifactId>
+                    <version>1.6</version>
+                    <executions>
+                        <execution>
+                            <id>sign-artifacts</id>
+                            <phase>verify</phase>
+                            <goals>
+                                <goal>sign</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>3.0.2</version>
+                    <executions>
+                        <execution>
+                            <id>copy-resources</id>
+                            <phase>test</phase>
+                            <goals>
+                                <goal>copy-resources</goal>
+                            </goals>
+                            <configuration>
+                                <outputDirectory>${basedir}/target/${project.build.finalName}/parent/</outputDirectory>
+                                <resources>
+                                    <resource>
+                                        <directory>src/test/javascript</directory>
+                                        <filtering>true</filtering>
+                                    </resource>
+                                </resources>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>com.github.searls</groupId>
+                    <artifactId>jasmine-maven-plugin</artifactId>
+                    <version>2.2</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>test</goal>
+                            </goals>
+                            <phase>test</phase>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <webDriverClassName>org.openqa.selenium.phantomjs.PhantomJSDriver</webDriverClassName>
+                        <webDriverCapabilities>
+                            <capability>
+                                <name>phantomjs.binary.path</name>
+                                <value>${phantomjs.binary}</value>
+                            </capability>
+                        </webDriverCapabilities>
+                        <jsSrcDir>${basedir}/src/main/resources/static/app</jsSrcDir>
+                        <jsTestSrcDir>${basedir}/target/${project.build.finalName}/parent</jsTestSrcDir>
+                        <specIncludes>
+                            <include>parent.nocache.js</include>
+                            <include>**/spec*.js</include>
+                        </specIncludes>
+                        <preloadSources>
+                            <source>${basedir}/src/test/resources/Rx.js</source>
+                        </preloadSources>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>com.github.klieber</groupId>
+                    <artifactId>phantomjs-maven-plugin</artifactId>
+                    <version>0.7</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>install</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <version>2.0.0</version>
+                    </configuration>
+                </plugin>
+            </plugins>            
+        </pluginManagement>
+    </build>
 	
 </project>
