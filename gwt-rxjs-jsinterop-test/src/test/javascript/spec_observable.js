@@ -13,6 +13,12 @@ describe("Observable creation", function() {
         setTimeout(check, 200);
     });
     
+    it("must provide \"create\"", function (done) {
+        expect(testsContainer.create()).toBeTruthy();
+        done();
+    });
+
+    
     it("must provide \"of\"", function (done) {
         expect(testsContainer.of()).toBeTruthy();
         done();

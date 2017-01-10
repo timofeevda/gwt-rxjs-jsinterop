@@ -28,9 +28,12 @@ import com.github.timofeevda.gwt.rxjs.interop.subscription.Subscription;
  * @author dtimofeev since 20.12.2016.
  * @param <T>
  */
-@JsType
-public interface Subscriber<T> extends Subscription {
-    void error(Object object);
-    void next(T value);
-    void complete();
+@JsType(isNative = true, namespace = "Rx")
+public class Subscriber<T> extends Subscription {
+    
+    public native void error(Object object);
+
+    public native void next(T value);
+
+    public native void complete();
 }

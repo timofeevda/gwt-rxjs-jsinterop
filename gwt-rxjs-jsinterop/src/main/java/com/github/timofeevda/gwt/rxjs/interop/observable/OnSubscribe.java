@@ -22,12 +22,13 @@
 package com.github.timofeevda.gwt.rxjs.interop.observable;
 
 import jsinterop.annotations.JsFunction;
-import com.github.timofeevda.gwt.rxjs.interop.functions.Action0;
+import com.github.timofeevda.gwt.rxjs.interop.subscription.AnonymousSubscription;
 
 /**
  * @author dtimofeev since 20.12.2016.
+ * @param <T>
  */
 @JsFunction
 public interface OnSubscribe<T> {
-    Action0 call(Subscriber<T> subscriber);
+    AnonymousSubscription call(Subscriber<T> subscriber);
 }

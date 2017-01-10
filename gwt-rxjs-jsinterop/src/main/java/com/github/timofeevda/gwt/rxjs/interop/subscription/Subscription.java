@@ -21,17 +21,35 @@
  */
 package com.github.timofeevda.gwt.rxjs.interop.subscription;
 
+import com.github.timofeevda.gwt.rxjs.interop.functions.Action0;
+import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
  * @author dtimofeev since 20.12.2016.
  */
-@JsType
-public interface Subscription {
-    @JsProperty
-    boolean isClosed();
-    void unsubscribe();
-    Subscription add(Subscription subscription);
-    void remove(Subscription subscription);
+@JsType(isNative = true)
+public class Subscription implements ISubscription {
+
+    @JsConstructor
+    public Subscription(Action0 unsubscribe) {
+
+    }
+
+    @JsConstructor
+    public Subscription() {
+
+    }
+
+    @JsProperty(name = "closed")
+    @Override
+    public native boolean isClosed();
+
+    @Override
+    public native void unsubscribe();
+
+    public native Subscription add(AnonymousSubscription tearDownLogic);
+
+    public native void remove(Subscription subscription);
 }

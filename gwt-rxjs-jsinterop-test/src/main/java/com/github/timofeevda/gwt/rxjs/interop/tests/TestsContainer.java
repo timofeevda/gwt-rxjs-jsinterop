@@ -26,6 +26,7 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import com.github.timofeevda.gwt.rxjs.interop.functions.Action0;
 import com.github.timofeevda.gwt.rxjs.interop.observable.Observable;
+import com.github.timofeevda.gwt.rxjs.interop.observable.Subscriber;
 import com.github.timofeevda.gwt.rxjs.interop.scheduler.Scheduler;
 import com.github.timofeevda.gwt.rxjs.interop.subscription.Subscription;
 
@@ -49,6 +50,24 @@ class TestsContainer {
 
     @JsProperty
     public int x = 10;
+    
+    @JsMethod(name = "create")
+    public boolean testCreate() {        
+        BooleanHolder teardownTriggered = new BooleanHolder();
+        StringHolder stringHolder = new StringHolder();
+        String[] values = new String[]{"1","2","3","4"};
+        // dummy "observable" implementation, just for API testing
+        Observable<String> observeStringArray = Observable.create((Subscriber<String> subscriber) -> {
+            subscriber.add(() -> teardownTriggered.value = true);
+            for(String value : values) {
+                subscriber.next(value);
+            }
+            subscriber.complete();
+            return subscriber::unsubscribe;
+        });
+        Subscription subscription = observeStringArray.subscribe(v -> stringHolder.value += v);
+        return stringHolder.value.equals("1234") && teardownTriggered.value && subscription.isClosed();
+    }
 
     @JsMethod(name = "of")
     public boolean testOf() {
