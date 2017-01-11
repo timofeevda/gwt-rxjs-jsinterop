@@ -7,8 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
 - Observable.fromEvent
-- Observable.fromMouseEvent
-- Observable.fromKeyboardEvent
+- ObservableEx.fromMouseEvent
+- ObservableEx.fromKeyboardEvent
 - JsInterops for mouse and keyboard events
 
 ## [1.0.0] - 2017-01-07
