@@ -78,6 +78,7 @@
             <modules>
                 <module>gwt-rxjs-jsinterop</module>
                 <module>gwt-rxjs-jsinterop-test</module>
+                <module>gwt-rxjs-jsinterop-onpage</module>
             </modules>
             <build>
                 <plugins>
@@ -157,7 +158,6 @@
                         <draftCompile>true</draftCompile>
                         <noServer>true</noServer>
                         <style>PRETTY</style>
-                        <optimizationLevel>0</optimizationLevel>
                     </configuration>
                 </plugin>
                 <plugin>

@@ -38,6 +38,7 @@ import com.github.timofeevda.gwt.rxjs.interop.functions.Producer;
 import com.github.timofeevda.gwt.rxjs.interop.scheduler.Scheduler;
 import com.github.timofeevda.gwt.rxjs.interop.subscription.Subscription;
 import com.github.timofeevda.gwt.rxjs.interop.functions.ProjectWithArray;
+import com.google.gwt.dom.client.Element;
 
 /**
  * @author dtimofeev since 20.12.2016.
@@ -46,11 +47,13 @@ import com.github.timofeevda.gwt.rxjs.interop.functions.ProjectWithArray;
 @JsType(namespace = "Rx", isNative = true)
 public class Observable<T> {
 
-    public native static <T> Observable<T> of(T... args);
+    public native static <R> Observable<R> of(R... args);
 
-    public native static <T> Observable<T> from(T[] args);
+    public native static <R> Observable<R> from(R[] args);
 
-    public native static <T> Observable<T> create(OnSubscribe<T> onSubscribe);
+    public native static <R> Observable<R> fromEvent(Element target, String eventName);
+
+    public native static <R> Observable<R> create(OnSubscribe<R> onSubscribe);
 
     public native Observable<T> audit(Observable durationSelector);
 
@@ -484,7 +487,7 @@ public class Observable<T> {
     public native <T2, T3, T4, T5, T6, R> Observable<R> zip(
             Observable<? extends T2> v2, Observable<? extends T3> v3, Observable<? extends T4> v4, Observable<? extends T5> v5, Observable<? extends T6> v6,
             Func6<? super T, ? super T2, ? super T3, ? super T4, ? super T5, ? super T6, ? extends R> projectFunction);
-    
+
     public native <T2> Observable<T[]> zip(Observable<? extends T2> v2);
 
     public native <T2, T3> Observable<T[]> zip(Observable<? extends T2> v2, Observable<? extends T3> v3);
@@ -494,9 +497,9 @@ public class Observable<T> {
     public native <T2, T3, T4, T5> Observable<T[]> zip(Observable<? extends T2> v2, Observable<? extends T3> v3, Observable<? extends T4> v4, Observable<? extends T5> v5);
 
     public native <T2, T3, T4, T5, T6> Observable<T[]> zip(Observable<? extends T2> v2, Observable<? extends T3> v3, Observable<? extends T4> v4, Observable<? extends T5> v5, Observable<? extends T6> v6);
-    
+
     public native static <T> Observable<T[]> zip(Observable<? extends T>[] values);
-        
+
     public native static <T1, T2, R> Observable<R> zip(Observable<? extends T1> v1, Observable<? extends T2> v2,
             Func2<? super T1, ? super T2, ? extends R> projectFunction);
 
@@ -515,8 +518,8 @@ public class Observable<T> {
     public native static <T1, T2, T3, T4, T5, T6, R> Observable<R> zip(Observable<? extends T1> v1,
             Observable<? extends T2> v2, Observable<? extends T3> v3, Observable<? extends T4> v4, Observable<? extends T5> v5, Observable<? extends T6> v6,
             Func6<? super T1, ? super T2, ? super T3, ? super T4, ? super T5, ? super T6, ? extends R> projectFunction);
-    
-    public native static <T,R> Observable<R> zip(Observable<? extends T>[] values, ProjectWithArray<? extends T, R> projectFunction);
+
+    public native static <T, R> Observable<R> zip(Observable<? extends T>[] values, ProjectWithArray<? extends T, R> projectFunction);
 
     public native Observable<T> zipAll();
 
