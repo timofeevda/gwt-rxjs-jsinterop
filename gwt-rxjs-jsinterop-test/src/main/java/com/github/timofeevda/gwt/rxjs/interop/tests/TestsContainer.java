@@ -21,6 +21,7 @@
  */
 package com.github.timofeevda.gwt.rxjs.interop.tests;
 
+import com.github.timofeevda.gwt.rxjs.interop.subscription.AnonymousSubscription;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -67,6 +68,21 @@ class TestsContainer {
         });
         Subscription subscription = observeStringArray.subscribe(v -> stringHolder.value += v);
         return stringHolder.value.equals("1234") && teardownTriggered.value && subscription.isClosed();
+    }
+
+    @JsMethod(name = "createWithAdditionalSubscription")
+    public boolean testCreateWithAdditionalSubscription() {
+        BooleanHolder teardownTriggered = new BooleanHolder();
+        StringHolder stringHolder = new StringHolder();
+        // dummy "observable" implementation, just for API testing
+        Observable<String> observeStringArray = Observable.create((Subscriber<String> subscriber) -> {
+            subscriber.next("1");
+            subscriber.complete();
+            return subscriber::unsubscribe;
+        });
+        Subscription subscription = observeStringArray.subscribe(v -> stringHolder.value += v);
+        subscription.add(() -> teardownTriggered.value = true);
+        return teardownTriggered.value;
     }
 
     @JsMethod(name = "of")

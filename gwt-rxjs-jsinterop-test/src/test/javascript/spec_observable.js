@@ -18,7 +18,11 @@ describe("Observable creation", function() {
         done();
     });
 
-    
+    it("must provide subscription with \"add\" operation", function (done) {
+        expect(testsContainer.createWithAdditionalSubscription()).toBeTruthy();
+        done();
+    });
+
     it("must provide \"of\"", function (done) {
         expect(testsContainer.of()).toBeTruthy();
         done();

@@ -2,3 +2,4 @@
 .iml
 target
 nb-configuration.xml
+*.iml
