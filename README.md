@@ -5,7 +5,7 @@
 
 RxJS JavaScript interoperability bindings for GWT 2.8
 
-Currently supports major functionality of rxjs 5.0.2
+Currently supports major functionality of rxjs 5.0.3
 
 Add dependency to your pom.xml:
 ```xml
@@ -20,5 +20,7 @@ Update your GWT module with the following line:
 ```xml
 <inherits name="com.github.timofeevda.gwt.rxjs.interop"/>
 ```
+
+Don't forget to add actual [rxjs](https://github.com/ReactiveX/rxjs) library to page resources
 
 
