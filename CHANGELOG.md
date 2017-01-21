@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) 
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## Unreleased
+### Added
+- pluck operator
+- flatMap and flatMapTo aliases
+
 ## [1.1.0] - 2017-01-12
 ### Added
 - Observable.fromEvent
