@@ -12,7 +12,7 @@ describe("Observable creation", function() {
         };
         setTimeout(check, 200);
     });
-    
+
     it("must provide \"create\"", function (done) {
         expect(testsContainer.create()).toBeTruthy();
         done();
@@ -32,30 +32,30 @@ describe("Observable creation", function() {
         expect(testsContainer.from()).toBe("7");
         done();
     });
-    
+
 });
 describe("Observable operators", function () {
-    
+
     it("must provide \"defer\"", function (done) {
         expect(testsContainer.defer()).toBe("1");
         done();
     });
-    
+
     it("must provide \"empty\"", function (done) {
         expect(testsContainer.empty()).toBe("11");
         done();
     });
-    
+
     it("must provide \"if\" then", function (done) {
         expect(testsContainer.ifThen()).toBeTruthy();
         done();
     });
-    
+
     it("must provide \"if\" else", function (done) {
         expect(testsContainer.ifElse()).toBeFalsy();
         done();
     });
-    
+
     it("must provide \"map\"", function (done) {
         expect(testsContainer.map()).toBeFalsy();
         done();
@@ -63,6 +63,11 @@ describe("Observable operators", function () {
 
     it("must provide \"filter\"", function (done) {
         expect(testsContainer.filter()).toBeFalsy();
+        done();
+    });
+
+    it("must provide \"filterPredicate\"", function (done) {
+        expect(testsContainer.filterPredicate()).toBeFalsy();
         done();
     });
 
@@ -170,7 +175,7 @@ describe("Observable operators", function () {
         expect(testsContainer.mergeAll()).toBe("13");
         done();
     });
-    
+
     it("must provide \"pairwise\"", function (done) {
         expect(testsContainer.pairwise()).toBe("13");
         done();
@@ -180,12 +185,12 @@ describe("Observable operators", function () {
         expect(testsContainer.partition()).toBe("1");
         done();
     });
-    
+
     it("must provide \"range\"", function (done) {
         expect(testsContainer.range()).toBe("123");
         done();
     });
-    
+
     it("must provide \"throw\"", function (done) {
         expect(testsContainer.throw()).toBe("1");
         done();
@@ -202,7 +207,7 @@ describe("Schedulers", function () {
         expect(true).toBe(true);
         done();
     });
-    
+
 });
 
 describe("Interval operator", function() {

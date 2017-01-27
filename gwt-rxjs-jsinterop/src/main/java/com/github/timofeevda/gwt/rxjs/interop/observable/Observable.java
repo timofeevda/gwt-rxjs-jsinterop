@@ -45,17 +45,19 @@ import com.google.gwt.dom.client.Element;
  * @param <T>
  */
 @JsType(namespace = "Rx", isNative = true)
+@SuppressWarnings("unused")
 public class Observable<T> {
 
+    @SafeVarargs
     public native static <R> Observable<R> of(R... args);
 
     public native static <R> Observable<R> from(R[] args);
 
     public native static <R> Observable<R> fromEvent(Element target, String eventName);
 
-    public native static <R> Observable<R> create(OnSubscribe<R> onSubscribe);
+    public native static <R> Observable<R> create(OnSubscribe<? extends R> onSubscribe);
 
-    public native Observable<T> audit(Observable durationSelector);
+    public native Observable<T> audit(Observable<?> durationSelector);
 
     public native Observable<T> auditTime(int duration);
 
@@ -76,11 +78,11 @@ public class Observable<T> {
     public native Observable<T[]> bufferWhen(Observable closingSelector);
 
     @JsMethod(name = "catch")
-    public native <R> Observable<R> _catch(Func2<?, Observable<T>, Observable<R>> catcher);
+    public native <R> Observable<R> _catch(Func2<?, Observable<? super T>, Observable<? extends R>> catcher);
 
     public native Observable<T> combineAll();
 
-    public native <R> Observable<R> combineAll(Func1<T[], R> mapper);
+    public native <R> Observable<R> combineAll(Func1<T[], ? extends R> mapper);
 
     public native static <T1, T2, R> Observable<R> combineLatest(Observable<? extends T1> v1, Observable<? extends T2> v2,
             Func2<? super T1, ? super T2, ? extends R> combineFunction);
@@ -99,7 +101,7 @@ public class Observable<T> {
 
     public native Observable<T> concat(Observable<? extends T> v1);
 
-    public native <T> Observable<T> concatAll();
+    public native Observable<T> concatAll();
 
     public native static <T> Observable<T> concat(Observable<? extends T> v1, Observable<? extends T> v2);
 
@@ -111,15 +113,15 @@ public class Observable<T> {
 
     public native static <T> Observable<T> concat(Observable<? extends T>[] observables);
 
-    public native <R> Observable<R> concatMap(Projector<T, R> projector);
+    public native <R> Observable<R> concatMap(Projector<? super T, R> projector);
 
-    public native <I, R> Observable<T> concatMap(Projector<T, I> projector, ResultSelector<T, I, R> resultSelector);
+    public native <I, R> Observable<T> concatMap(Projector<? super T, I> projector, ResultSelector<? super T, ? super I, R> resultSelector);
 
-    public native <I, R> Observable<R> concatMapTo(Observable<I> observable, ResultSelector<T, I, R> resultSelector);
+    public native <I, R> Observable<R> concatMapTo(Observable<I> observable, ResultSelector<? super T, ? super I, R> resultSelector);
 
     public native Observable<Integer> count();
 
-    public native Observable<Integer> count(CountPredicate<T> predicate);
+    public native Observable<Integer> count(IndexedSourcePredicate<? super T> predicate);
 
     public native Observable<T> debounce(Observable<Integer> durationSelector);
 
@@ -131,38 +133,38 @@ public class Observable<T> {
 
     public native Observable<T> delay(int initialDelay);
 
-    public native Observable<T> delayWhen(Func1<T, Observable<?>> delayDurationSelector);
+    public native Observable<T> delayWhen(Func1<? super T, Observable<?>> delayDurationSelector);
 
-    public native Observable<T> delayWhen(Func1<T, Observable<?>> delayDurationSelector, Observable<?> subscriptionDelay);
+    public native Observable<T> delayWhen(Func1<? super T, Observable<?>> delayDurationSelector, Observable<?> subscriptionDelay);
 
     public native Observable<T> distinct();
 
-    public native <K> Observable<T> distinct(KeySelector<T, K> keySelector);
+    public native <K> Observable<T> distinct(KeySelector<? super T, K> keySelector);
 
-    public native <K> Observable<T> distinct(KeySelector<T, K> keySelector, Observable<?> flushes);
+    public native <K> Observable<T> distinct(KeySelector<? super T, K> keySelector, Observable<?> flushes);
 
     public native Observable<T> distinctUntilChanged();
 
-    public native <K> Observable<T> distinctUntilChanged(KeyComparator<T, K> keyComparator);
+    public native <K> Observable<T> distinctUntilChanged(KeyComparator<? super T, K> keyComparator);
 
-    public native <K> Observable<T> distinctUntilChanged(KeyComparator<T, K> keyComparator, KeySelector<T, K> keySelector);
-
-    @JsMethod(name = "do")
-    public native <R> Observable<R> _do(Action1<T> onNext);
+    public native <K> Observable<T> distinctUntilChanged(KeyComparator<? super T, K> keyComparator, KeySelector<? super T, K> keySelector);
 
     @JsMethod(name = "do")
-    public native Subscription _do(Action1<T> onNext, Action1<?> onError, Action0 onCompleted);
+    public native Observable<T> _do(Action1<T> onNext);
 
     @JsMethod(name = "do")
-    public native <R> Observable<R> _do(Observer<T> observer);
+    public native Observable<T> _do(Action1<T> onNext, Action1<?> onError, Action0 onCompleted);
+
+    @JsMethod(name = "do")
+    public native Observable<T> _do(Observer<? super T> observer);
 
     public native static <T> Observable<T> empty();
 
     public native Observable<T> elementAt(int index);
 
-    public native Observable<T> elementAt(int index, T defaultValue);
+    public native <R extends T> Observable<T> elementAt(int index, R defaultValue);
 
-    public native Observable<Boolean> every(CountPredicate<T> predicate);
+    public native Observable<Boolean> every(IndexedSourcePredicate<T> predicate);
 
     @JsMethod(name = "throw")
     public native static Observable _throw(Object error);
@@ -172,34 +174,44 @@ public class Observable<T> {
 
     public native Observable<T> exhaust();
 
-    public native <R> Observable<T> exhaustMap(Projector<T, R> projector);
+    public native <R> Observable<T> exhaustMap(Projector<? super T, R> projector);
 
-    public native <I, R> Observable<T> exhaustMap(Projector<T, I> projector, ResultSelector<T, I, R> resultSelector);
+    public native <I, R> Observable<T> exhaustMap(Projector<? super T, I> projector, ResultSelector<? super T, ? super I, R> resultSelector);
 
-    public native <R> Observable<T> expand(Projector<T, R> projector);
+    public native <R> Observable<R> expand(Projector<? super T, R> projector);
 
-    public native <R> Observable<T> expand(Projector<T, R> projector, int concurrent);
+    public native <R> Observable<R> expand(Projector<? super T, R> projector, int concurrent);
 
-    public native <R> Observable<T> expand(Projector<T, R> projector, int concurrent, Scheduler scheduler);
+    public native <R> Observable<R> expand(Projector<? super T, R> projector, int concurrent, Scheduler scheduler);
 
-    public native Observable<T> filter(Predicate<T> predicate);
+    public native Observable<T> filter(Predicate<? super T> predicate);
+
+    public native Observable<T> filter(IndexedPredicate<? super T> indexedPredicate);
 
     @JsMethod(name = "finally")
     public native Observable<T> _finally(Action0 action);
 
-    public native Observable<T> find(Predicate<T> predicate);
+    public native Observable<T> find(Predicate<? super T> predicate);
 
-    public native Observable<Integer> findIndex(CountPredicate<T> predicate);
+    public native Observable<T> find(IndexedPredicate<? super T> indexedPredicate);
 
-    public native Observable<T> first(Predicate<T> predicate);
+    public native Observable<Integer> findIndex(IndexedSourcePredicate<? super T> predicate);
 
-    public native <I, R> Observable<R> first(Predicate<T> predicate, ResultSelector<T, I, R> resultSelector);
+    public native Observable<T> first(Predicate<? super T> predicate);
 
-    public native <I, R> Observable<R> first(Predicate<T> predicate, ResultSelector<T, I, R> resultSelector, R defaultValue);
+    public native Observable<T> first(IndexedPredicate<? super T> indexedPredicate);
 
-    public native <K> Observable<GroupedObservable<K, T>> groupBy(KeySelector<T, K> keySelector);
+    public native <I, R> Observable<R> first(Predicate<? super T> predicate, IndexedResultSelector<? super T, R> resultSelector);
 
-    public native <K, R> Observable<GroupedObservable<K, R>> groupBy(KeySelector<T, K> keySelector, ElementSelector<T, R> elementSelector);
+    public native <I, R> Observable<R> first(IndexedPredicate<? super T> indexedPredicate, IndexedResultSelector<? super T, R> resultSelector);
+
+    public native <I, R> Observable<R> first(Predicate<? super T> predicate, IndexedResultSelector<? super T, R> resultSelector, R defaultValue);
+
+    public native <I, R> Observable<R> first(IndexedPredicate<? super T> indexedPredicate, IndexedResultSelector<? super T, R> resultSelector, R defaultValue);
+
+    public native <K> Observable<GroupedObservable<K, T>> groupBy(KeySelector<? super T, K> keySelector);
+
+    public native <K, R> Observable<GroupedObservable<K, R>> groupBy(KeySelector<? super T, K> keySelector, ElementSelector<? super T, R> elementSelector);
 
     public native Observable<T> ignoreElements();
 
@@ -218,63 +230,69 @@ public class Observable<T> {
 
     public native static Observable<Integer> interval(int period, Scheduler scheduler);
 
-    public native Observable<T> last(Predicate<T> predicate);
+    public native Observable<T> last(Predicate<? super T> predicate);
 
-    public native <I, R> Observable<R> last(Predicate<T> predicate, ResultSelector<T, I, R> resultSelector);
+    public native Observable<T> last(IndexedPredicate<? super T> indexedPredicate);
 
-    public native <I, R> Observable<R> last(Predicate<T> predicate, ResultSelector<T, I, R> resultSelector, R defaultValue);
+    public native <R> Observable<R> last(Predicate<? super T> predicate, IndexedResultSelector<? super T, ? extends R> resultSelector);
 
-    public native <R> Observable<R> let(Func1<Observable<T>, Observable<R>> selector);
+    public native <R> Observable<R> last(IndexedPredicate<? super T> indexedPredicate, IndexedResultSelector<? super T, ? extends R> resultSelector);
 
-    public native <R> Observable<R> map(Func1<T, R> mapper);
+    public native <R> Observable<R> last(Predicate<? super T> predicate, IndexedResultSelector<? super T, ? extends  R> resultSelector, R defaultValue);
+
+    public native <R> Observable<R> last(IndexedPredicate<? super T> indexedPredicate, IndexedResultSelector<? super T, ? extends R> resultSelector, R defaultValue);
+
+    public native <R> Observable<R> let(Func1<Observable<? super T>, Observable<R>> selector);
+
+    public native <R> Observable<R> map(Func1<? super T, ? extends R> mapper);
 
     public native <R> Observable<R> mapTo(R value);
 
     public native Observable<T> max();
 
-    public native Observable<T> max(Comparer<T> comparer);
+    public native Observable<T> max(Comparator<? super T> comparator);
 
     public native static <T> Observable<T> merge(Observable<T> first, Observable<T> second);
 
-    public native <T> Observable<T> mergeAll();
+    public native Observable<T> mergeAll();
 
-    public native <T> Observable<T> mergeAll(int concurrent);
+    public native Observable<T> mergeAll(int concurrent);
 
-    public native <R> Observable<R> mergeMap(Projector<T, R> projector);
+    public native <R> Observable<R> mergeMap(Projector<? super T, ? extends R> projector);
 
-    public native <R> Observable<R> mergeMap(Projector<T, R> projector, int concurrent);
+    public native <R> Observable<R> mergeMap(Projector<? super T, ? extends R> projector, int concurrent);
 
-    public native <I, R> Observable<R> mergeMap(Projector<T, R> projector, ResultSelector<T, I, R> resultSelector);
+    public native <I, R> Observable<R> mergeMap(Projector<? super T, ? extends R> projector, ResultSelector<? super T, ? super I, ? extends R> resultSelector);
 
-    public native <I, R> Observable<R> mergeMap(Projector<T, R> projector, ResultSelector<T, I, R> resultSelector, int concurrent);
+    public native <I, R> Observable<R> mergeMap(Projector<? super T, ? extends R> projector, ResultSelector<? super T, ? super I, ? extends R> resultSelector, int concurrent);
 
-    public native <R> Observable<R> mergeMapTo(Observable<R> innerObservable);
+    public native <R> Observable<R> mergeMapTo(Observable<? extends R> innerObservable);
 
-    public native <R> Observable<R> mergeMapTo(Observable<R> innerObservable, int concurrent);
+    public native <R> Observable<R> mergeMapTo(Observable<? extends R> innerObservable, int concurrent);
 
-    public native <I, R> Observable<R> mergeMapTo(Observable<R> innerObservable, ResultSelector<T, I, R> resultSelector);
+    public native <I, R> Observable<R> mergeMapTo(Observable<? extends R> innerObservable, ResultSelector<? super T, ? super I, ? extends R> resultSelector);
 
-    public native <I, R> Observable<R> mergeMapTo(Observable<R> innerObservable, ResultSelector<T, I, R> resultSelector, int concurrent);
+    public native <I, R> Observable<R> mergeMapTo(Observable<? extends R> innerObservable, ResultSelector<? super T, ? super I, ? extends R> resultSelector, int concurrent);
 
-    public native <R> Observable<R> mergeScan(Scanner<R, T> scanner, R seed);
+    public native <R> Observable<R> mergeScan(Scanner<? extends R, ? super T> scanner, R seed);
 
-    public native <R> Observable<R> mergeScan(Scanner<R, T> scanner, R seed, int concurrent);
+    public native <R> Observable<R> mergeScan(Scanner<? extends R, ? super T> scanner, R seed, int concurrent);
 
     public native Observable<T> min();
 
-    public native Observable<T> min(Comparer<T> comparer);
+    public native Observable<T> min(Comparator<? super T> comparator);
 
-    public native ConnectableObservable<T> multicast(Subject<T> subject);
+    public native ConnectableObservable<T> multicast(Subject<? extends T> subject);
 
-    public native ConnectableObservable<T> multicast(Factory<Subject<T>> subjectFactory);
+    public native ConnectableObservable<T> multicast(Factory<Subject<? extends T>> subjectFactory);
 
-    public native ConnectableObservable<T> multicast(Subject<T> subject, Selector<T> selector);
+    public native ConnectableObservable<T> multicast(Subject<? extends T> subject, Selector<? super T> selector);
 
-    public native ConnectableObservable<T> multicast(Factory<Subject<T>> subjectFactory, Selector<T> selector);
+    public native ConnectableObservable<T> multicast(Factory<Subject<? extends T>> subjectFactory, Selector<? extends T> selector);
 
-    public native static <T> Observable<T> multicast(SubjectFactory<T> subjectFactory);
+    public native static <T> Observable<T> multicast(SubjectFactory<? extends T> subjectFactory);
 
-    public native static <T> Observable<T> multicast(SubjectFactory<T> subjectFactory, Selector<T> selector);
+    public native static <T> Observable<T> multicast(SubjectFactory<? extends T> subjectFactory, Selector<? extends T> selector);
 
     public native static <T> Observable<T> never();
 
@@ -298,13 +316,13 @@ public class Observable<T> {
 
     public native Observable<T[]> pairwise();
 
-    public native Observable<T>[] partition(Func1<T, Boolean> predicate);
+    public native Observable<T>[] partition(Func1<? super T, Boolean> predicate);
 
     public native ConnectableObservable<T> publish();
 
-    public native ConnectableObservable<T> publish(Selector<T> selector);
+    public native ConnectableObservable<T> publish(Selector<? super T> selector);
 
-    public native ConnectableObservable<T> publishBehavior(T value);
+    public native <R extends T> ConnectableObservable<T> publishBehavior(R value);
 
     public native ConnectableObservable<T> publishLast();
 
@@ -368,13 +386,15 @@ public class Observable<T> {
 
     public native Observable<T> share();
 
-    public native Observable<T> single(CountPredicate<T> predicate);
+    public native Observable<T> single(IndexedSourcePredicate<T> predicate);
 
     public native Observable<T> skip(int count);
 
     public native Observable<T> skipUntil(Observable notifier);
 
     public native Observable<T> skipWhile(Predicate<T> predicate);
+
+    public native Observable<T> skipWhile(IndexedPredicate<T> indexedPredicate);
 
     public native Observable<T> startWith(T v1);
 
@@ -384,24 +404,24 @@ public class Observable<T> {
 
     public native Observable<T> startWith(T v1, T v2, Scheduler scheduler);
 
-    public native Subscription subscribe(Action1<T> onNext);
+    public native Subscription subscribe(Action1<? super T> onNext);
 
-    public native Subscription subscribe(Action1<T> onNext, Action1<?> onError, Action0 onCompleted);
+    public native Subscription subscribe(Action1<? super T> onNext, Action1<?> onError, Action0 onCompleted);
 
-    public native Subscription subscribe(Observer<T> observer);
+    public native Subscription subscribe(Observer<? super T> observer);
 
-    public native <R> Observable<R> subscribeOn(Scheduler scheduler);
+    public native Observable<T> subscribeOn(Scheduler scheduler);
 
-    public native <R> Observable<R> subscribeOn(Scheduler scheduler, int delay);
+    public native Observable<T> subscribeOn(Scheduler scheduler, int delay);
 
     @JsMethod(name = "switch")
-    public native <R> Observable<R> _switch();
+    public native Observable<T> _switch();
 
-    public native <R> Observable<R> switchMap(Projector<T, R> projection);
+    public native <R> Observable<R> switchMap(Projector<? super T, ? extends R> projection);
 
-    public native <I, R> Observable<R> switchMap(Projector<T, I> projection, ResultSelector<T, I, R> resultSelector);
+    public native <I, R> Observable<R> switchMap(Projector<? super T, ? extends I> projection, ResultSelector<? super T, ? super I, ? extends R> resultSelector);
 
-    public native <I, R> Observable<R> switchMapTo(Observable<I> observable, ResultSelector<T, I, R> resultSelector);
+    public native <I, R> Observable<R> switchMapTo(Observable<? extends I> observable, ResultSelector<? super T, ? super I, ? extends R> resultSelector);
 
     public native Observable<T> take(int count);
 
@@ -411,7 +431,7 @@ public class Observable<T> {
 
     public native Observable<T> takeWhile(Observable notifier);
 
-    public native Observable<T> throttle(Func1<T, Observable<?>> durationSelector);
+    public native Observable<T> throttle(Func1<? super T, Observable<?>> durationSelector);
 
     public native Observable<T> throttleTime(int duration);
 
@@ -425,9 +445,9 @@ public class Observable<T> {
 
     public native Observable<T> timeout(int due, Scheduler scheduler);
 
-    public native Observable<T> timeoutWith(int due, Observable<T> withObservable);
+    public native Observable<T> timeoutWith(int due, Observable<? extends T> withObservable);
 
-    public native Observable<T> timeoutWith(int due, Observable<T> withObservable, Scheduler scheduler);
+    public native Observable<T> timeoutWith(int due, Observable<? extends T> withObservable, Scheduler scheduler);
 
     public native static Observable<Integer> timer(int initialDelay);
 
@@ -519,11 +539,11 @@ public class Observable<T> {
             Observable<? extends T2> v2, Observable<? extends T3> v3, Observable<? extends T4> v4, Observable<? extends T5> v5, Observable<? extends T6> v6,
             Func6<? super T1, ? super T2, ? super T3, ? super T4, ? super T5, ? super T6, ? extends R> projectFunction);
 
-    public native static <T, R> Observable<R> zip(Observable<? extends T>[] values, ProjectWithArray<? extends T, R> projectFunction);
+    public native static <T, R> Observable<R> zip(Observable<? extends T>[] values, ProjectWithArray<? extends T, ? extends R> projectFunction);
 
     public native Observable<T> zipAll();
 
-    public native <R> Observable<R> zipAll(Func1<T[], R> mapper);
+    public native <R> Observable<R> zipAll(Func1<T[], ? extends R> mapper);
 
     @JsFunction
     public interface Accumulator<T> {
@@ -540,7 +560,7 @@ public class Observable<T> {
     @JsFunction
     public interface Selector<T> {
 
-        Observable<T> call(Observable<T> source);
+        Observable<T> call(Observable<T> observable);
     }
 
     @JsFunction
@@ -552,13 +572,13 @@ public class Observable<T> {
     @JsFunction
     public interface SubjectFactory<T> {
 
-        Subject<T> call(Observable<T> obs);
+        Subject<T> call(Observable<T> observable);
     }
 
     @JsFunction
-    public interface Comparer<T> {
+    public interface Comparator<T> {
 
-        int project(T i1, T i2);
+        int compare(T i1, T i2);
     }
 
     @JsFunction
@@ -580,15 +600,27 @@ public class Observable<T> {
     }
 
     @JsFunction
-    public interface CountPredicate<T> {
+    public interface IndexedResultSelector<T, R> {
 
-        Boolean test(T value, int index, Observable<T> source);
+        R selectResult(T value, int index);
+    }
+
+    @JsFunction
+    public interface IndexedSourcePredicate<T> {
+
+        boolean test(T value, int index, Observable<T> source);
+    }
+
+    @JsFunction
+    public interface IndexedPredicate<T> {
+
+        boolean test(T value, int index);
     }
 
     @JsFunction
     public interface Predicate<T> {
 
-        Boolean test(T value, int index);
+        boolean test(T value);
     }
 
     @JsFunction
@@ -606,7 +638,7 @@ public class Observable<T> {
     @JsFunction
     public interface KeyComparator<K, K1> {
 
-        boolean selectKey(K k, K1 k1);
+        boolean compareKey(K k, K1 k1);
     }
 
 }

@@ -21,7 +21,6 @@
  */
 package com.github.timofeevda.gwt.rxjs.interop.tests;
 
-import com.github.timofeevda.gwt.rxjs.interop.subscription.AnonymousSubscription;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -51,20 +50,20 @@ class TestsContainer {
 
     @JsProperty
     public int x = 10;
-    
+
     @JsMethod(name = "create")
-    public boolean testCreate() {        
+    public boolean testCreate() {
         BooleanHolder teardownTriggered = new BooleanHolder();
         StringHolder stringHolder = new StringHolder();
         String[] values = new String[]{"1","2","3","4"};
         // dummy "observable" implementation, just for API testing
-        Observable<String> observeStringArray = Observable.create((Subscriber<String> subscriber) -> {
+        Observable<Object> observeStringArray = Observable.create((Subscriber<String> subscriber) -> {
             subscriber.add(() -> teardownTriggered.value = true);
             for(String value : values) {
                 subscriber.next(value);
             }
             subscriber.complete();
-            return subscriber::unsubscribe;
+            return subscriber;
         });
         Subscription subscription = observeStringArray.subscribe(v -> stringHolder.value += v);
         return stringHolder.value.equals("1234") && teardownTriggered.value && subscription.isClosed();
@@ -91,7 +90,7 @@ class TestsContainer {
         Observable.of(true).subscribe(aBoolean -> bh.value = aBoolean);
         return bh.value;
     }
-    
+
     @JsMethod(name = "from")
     public String testFrom() {
         final StringHolder bh = new StringHolder();
@@ -113,13 +112,20 @@ class TestsContainer {
         return bh.value;
     }
 
+    @JsMethod(name = "filterPredicate")
+    public boolean testFilterPredicate() {
+        final BooleanHolder bh = new BooleanHolder();
+        Observable.of(false, true).filter(v -> false).subscribe(aBoolean -> bh.value = aBoolean);
+        return bh.value;
+    }
+
     @JsMethod(name = "merge")
     public String testMerge() {
         final StringHolder sh = new StringHolder();
         Observable.merge(Observable.of("1"), Observable.of("2")).subscribe(v -> sh.value += v);
         return sh.value;
     }
-    
+
     @JsMethod(name = "defer")
     public String testDefer() {
         final StringHolder sh = new StringHolder();
@@ -140,21 +146,21 @@ class TestsContainer {
         Observable.of("1")._do(v -> sh.value += v).subscribe(v -> {});
         return sh.value;
     }
-      
+
     @JsMethod(name = "empty")
     public String testEmpty() {
         final StringHolder sh = new StringHolder();
         Observable.of(1, 2, 3, 4).mergeMap((Integer item, int index) -> item % 2 == 0 ? Observable.of("1") : Observable.<String>empty()).subscribe(v -> sh.value += v);
         return sh.value;
     }
-    
+
     @JsMethod(name = "ifThen")
     public boolean testIfThen() {
         BooleanHolder bh = new BooleanHolder();
         Observable._if(() -> true, Observable.of(true)).subscribe(v -> bh.value = v);
         return bh.value;
     }
-    
+
     @JsMethod(name = "ifElse")
     public boolean testIfElse() {
         BooleanHolder bh = new BooleanHolder();
@@ -231,70 +237,70 @@ class TestsContainer {
         Observable.of("3", "1", "2","1").findIndex((value, index, source) -> value.equals("1")).subscribe(v -> sh.value += v);
         return sh.value;
     }
-    
+
     @JsMethod(name = "first")
     public String testFirst() {
         final StringHolder sh = new StringHolder();
         Observable.of("3", "1", "2","1", "2").first((v,i) -> v.equals("2")).subscribe(v -> sh.value += v);
         return sh.value;
     }
-    
+
     @JsMethod(name = "groupBy")
     public String testGroupBy() {
         final StringHolder sh = new StringHolder();
         Observable.of("3", "1", "2","1", "2").groupBy((String item) -> item).subscribe(v -> sh.value += v.key);
         return sh.value;
     }
-    
+
     @JsMethod(name = "ignoreElements")
     public String testIgnoreElements() {
         final StringHolder sh = new StringHolder();
         Observable.of("3", "1", "2","1", "2").ignoreElements().subscribe(v -> sh.value += v);
         return sh.value;
     }
-    
+
     @JsMethod(name = "last")
     public String testLast() {
         final StringHolder sh = new StringHolder();
         Observable.of("3", "1", "2","1", "2").first((v,i) -> v.equals("1")).subscribe(v -> sh.value += v);
         return sh.value;
     }
-    
+
     @JsMethod(name = "mapTo")
     public String testMapTo() {
         final StringHolder sh = new StringHolder();
         Observable.of("3", "1", "2","1", "2").mapTo("5").subscribe(v -> sh.value += v);
         return sh.value;
     }
-    
+
     @JsMethod(name = "max")
     public String testMax() {
         final StringHolder sh = new StringHolder();
         Observable.of(3, 5, 8, 1, 2).max().subscribe(v -> sh.value += v);
         return sh.value;
     }
-    
+
     @JsMethod(name = "maxComparer")
     public String testMaxComparer() {
         final StringHolder sh = new StringHolder();
         Observable.of(3, 5, 8, 12, -1).max(Integer::compareTo).subscribe(v -> sh.value += v);
         return sh.value;
     }
-    
+
     @JsMethod(name = "mergeAll")
     public String testMergeAll() {
         final StringHolder sh = new StringHolder();
         Observable.of(Observable.of("1"), Observable.of("3")).mergeAll().subscribe(v -> sh.value += v);
-        return sh.value;    
+        return sh.value;
     }
-    
+
     @JsMethod(name = "pairwise")
     public String testPairwise() {
         final StringHolder sh = new StringHolder();
         Observable.of("1", "3").pairwise().subscribe(v -> sh.value += v[0] + v[1]);
         return sh.value;
     }
-    
+
     @JsMethod(name = "partition")
     public String testPartition() {
         final StringHolder sh = new StringHolder();
@@ -302,26 +308,26 @@ class TestsContainer {
         obs[1].subscribe(v -> sh.value += v);
         return sh.value;
     }
-    
+
     @JsMethod(name = "range")
     public String testRange() {
         final StringHolder sh = new StringHolder();
         Observable.range(1,3).subscribe(v -> sh.value += v);
         return sh.value;
     }
-    
+
     @JsMethod(name = "throw")
     public String testThrow() {
         final StringHolder sh = new StringHolder();
         Observable._throw(1).subscribe(v -> {}, v -> sh.value += v, () -> {});
         return sh.value;
     }
-        
+
     @JsMethod(name = "asyncScheduler")
     public void testAsyncScheduler(Action0 jasmineDone) {
         Observable.of("1").observeOn(Scheduler.async).subscribe(v -> jasmineDone.call());
     }
-    
+
     @JsMethod(name = "interval")
     public void testInterval(Action0 jasmineDone) {
         Subscription subscription = Observable.interval(200).subscribe(v -> jasmineDone.call());
