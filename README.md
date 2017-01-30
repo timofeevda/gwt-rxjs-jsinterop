@@ -12,7 +12,7 @@ Add dependency to your pom.xml:
 <dependency>
     <groupId>com.github.timofeevda</groupId>
     <artifactId>gwt-rxjs-jsinterop</artifactId>
-    <version>1.1.0</version>
+    <version>${version}</version>
 </dependency>
 ```
 

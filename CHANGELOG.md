@@ -6,8 +6,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 ### Added
+
+## [1.1.2] - 2017-01-30
+### Added
+- added forgotten "capture" for fromEvent
+
+## [1.1.1] - 2017-01-30
+### Added
 - pluck operator
 - flatMap and flatMapTo aliases
+- fixed generics
 
 ## [1.1.0] - 2017-01-12
 ### Added
