@@ -55,6 +55,8 @@ public class Observable<T> {
 
     public native static <R> Observable<R> fromEvent(Element target, String eventName);
 
+    public native static <R> Observable<R> fromEvent(Element target, String eventName, boolean useCapture);
+
     public native static <R> Observable<R> create(OnSubscribe<? extends R> onSubscribe);
 
     public native Observable<T> audit(Observable<?> durationSelector);
