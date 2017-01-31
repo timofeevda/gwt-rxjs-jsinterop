@@ -408,6 +408,8 @@ public class Observable<T> {
 
     public native Subscription subscribe(Action1<? super T> onNext);
 
+    public native Subscription subscribe(Action1<? super T> onNext, Action1<?> onError);
+
     public native Subscription subscribe(Action1<? super T> onNext, Action1<?> onError, Action0 onCompleted);
 
     public native Subscription subscribe(Observer<? super T> observer);
