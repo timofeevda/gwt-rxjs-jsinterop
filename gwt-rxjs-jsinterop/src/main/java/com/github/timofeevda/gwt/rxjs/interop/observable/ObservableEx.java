@@ -32,6 +32,10 @@ import com.google.gwt.dom.client.Element;
  */
 public class ObservableEx {
 
+    public static Observable<MouseEvent> fromMouseEvent(Element element, String mouseEvent, boolean useCapture) {
+        return Observable.fromEvent(element, mouseEvent, useCapture);
+    }
+
     public static Observable<MouseEvent> fromMouseEvent(Element element, String mouseEvent) {
         return Observable.fromEvent(element, mouseEvent);
     }

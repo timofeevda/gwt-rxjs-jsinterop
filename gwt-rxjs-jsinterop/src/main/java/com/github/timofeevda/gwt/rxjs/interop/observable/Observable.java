@@ -147,9 +147,9 @@ public class Observable<T> {
 
     public native Observable<T> distinctUntilChanged();
 
-    public native <K> Observable<T> distinctUntilChanged(KeyComparator<? super T, K> keyComparator);
+    public native <K> Observable<T> distinctUntilChanged(KeyComparator<? super T> keyComparator);
 
-    public native <K> Observable<T> distinctUntilChanged(KeyComparator<? super T, K> keyComparator, KeySelector<? super T, K> keySelector);
+    public native <K> Observable<T> distinctUntilChanged(KeyComparator<? super T> keyComparator, KeySelector<? super T, K> keySelector);
 
     @JsMethod(name = "do")
     public native Observable<T> _do(Action1<T> onNext);
@@ -638,9 +638,9 @@ public class Observable<T> {
     }
 
     @JsFunction
-    public interface KeyComparator<K, K1> {
+    public interface KeyComparator<K> {
 
-        boolean compareKey(K k, K1 k1);
+        boolean compareKey(K k, K k1);
     }
 
 }
