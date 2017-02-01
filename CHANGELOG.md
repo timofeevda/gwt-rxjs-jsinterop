@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## Unreleased
 ### Added
 
+## [1.1.3] - 2017-01-30
+### Added
+- fixed generic definition for key comparator
+- fixed "subscribe" signature
+
 ## [1.1.2] - 2017-01-30
 ### Added
 - added forgotten "capture" for fromEvent
