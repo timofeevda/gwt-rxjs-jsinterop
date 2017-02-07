@@ -123,6 +123,8 @@ public class Observable<T> {
 
     public native Observable<Integer> count();
 
+    public native Observable<Integer> count(Predicate<? super T> predicate);
+
     public native Observable<Integer> count(IndexedSourcePredicate<? super T> predicate);
 
     public native Observable<T> debounce(Observable<Integer> durationSelector);
@@ -165,6 +167,8 @@ public class Observable<T> {
     public native Observable<T> elementAt(int index);
 
     public native <R extends T> Observable<T> elementAt(int index, R defaultValue);
+
+    public native Observable<T> every(Predicate<? super T> predicate);
 
     public native Observable<Boolean> every(IndexedSourcePredicate<T> predicate);
 
