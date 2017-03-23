@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## Unreleased
 ### Added
 
-## [1.1.4] - 2017-01-30
+## [1.1.4] - 2017-03-23
 ### Added
 - fixed jsinterop definition for Subscription
 - renamed AnonymousSubscription to TearDownSubscription to make it more meaningful
