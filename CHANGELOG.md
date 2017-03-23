@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## Unreleased
 ### Added
 
+## [1.1.4] - 2017-01-30
+### Added
+- fixed jsinterop definition for Subscription
+- renamed AnonymousSubscription to TearDownSubscription to make it more meaningful
+
 ## [1.1.3] - 2017-01-30
 ### Added
 - fixed generic definition for key comparator
