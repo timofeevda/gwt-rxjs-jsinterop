@@ -29,7 +29,7 @@ import jsinterop.annotations.JsType;
 /**
  * @author dtimofeev since 20.12.2016.
  */
-@JsType(isNative = true)
+@JsType(isNative = true, namespace = "Rx")
 public class Subscription implements ISubscription {
 
     @JsConstructor
@@ -49,7 +49,7 @@ public class Subscription implements ISubscription {
     @Override
     public native void unsubscribe();
 
-    public native Subscription add(AnonymousSubscription tearDownLogic);
+    public native Subscription add(TearDownSubscription tearDownLogic);
 
     public native void remove(Subscription subscription);
 }

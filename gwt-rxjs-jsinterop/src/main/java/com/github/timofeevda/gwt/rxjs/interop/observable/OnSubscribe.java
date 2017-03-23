@@ -22,7 +22,7 @@
 package com.github.timofeevda.gwt.rxjs.interop.observable;
 
 import jsinterop.annotations.JsFunction;
-import com.github.timofeevda.gwt.rxjs.interop.subscription.AnonymousSubscription;
+import com.github.timofeevda.gwt.rxjs.interop.subscription.TearDownSubscription;
 
 /**
  * @author dtimofeev since 20.12.2016.
@@ -30,5 +30,5 @@ import com.github.timofeevda.gwt.rxjs.interop.subscription.AnonymousSubscription
  */
 @JsFunction
 public interface OnSubscribe<T> {
-    AnonymousSubscription call(Subscriber<T> subscriber);
+    TearDownSubscription call(Subscriber<T> subscriber);
 }

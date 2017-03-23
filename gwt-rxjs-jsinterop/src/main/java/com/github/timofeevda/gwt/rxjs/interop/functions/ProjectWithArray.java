@@ -21,6 +21,8 @@
  */
 package com.github.timofeevda.gwt.rxjs.interop.functions;
 
+import jsinterop.annotations.JsFunction;
+
 /**
  *
  * @author dtimofeev since 06.01.2017.
@@ -28,6 +30,7 @@ package com.github.timofeevda.gwt.rxjs.interop.functions;
  * @param <T>
  * @param <R>
  */
+@JsFunction
 public interface ProjectWithArray<T,R> {
     R call(T v, T...args);
 }

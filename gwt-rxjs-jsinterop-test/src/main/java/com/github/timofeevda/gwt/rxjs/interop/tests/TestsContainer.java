@@ -21,14 +21,17 @@
  */
 package com.github.timofeevda.gwt.rxjs.interop.tests;
 
-import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
 import com.github.timofeevda.gwt.rxjs.interop.functions.Action0;
 import com.github.timofeevda.gwt.rxjs.interop.observable.Observable;
+import com.github.timofeevda.gwt.rxjs.interop.observable.OnSubscribe;
 import com.github.timofeevda.gwt.rxjs.interop.observable.Subscriber;
 import com.github.timofeevda.gwt.rxjs.interop.scheduler.Scheduler;
 import com.github.timofeevda.gwt.rxjs.interop.subscription.Subscription;
+import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
+
+import java.util.Arrays;
 
 /**
  * @author dtimofeev since 21.12.2016.
@@ -50,6 +53,18 @@ class TestsContainer {
 
     @JsProperty
     public int x = 10;
+
+    @JsMethod(name="subscribers")
+    public boolean testSubscribers() {
+        Subscriber[] subscribers = new Subscriber[10];
+        for(int i=0; i < 10; i++) {
+            final int index = i;
+            Observable.create((OnSubscribe<String>) subscriber -> subscribers[index] = subscriber).subscribe(s -> {});
+        }
+        Arrays.stream(subscribers).forEach(Subscription::unsubscribe);
+        return true;
+    }
+
 
     @JsMethod(name = "create")
     public boolean testCreate() {

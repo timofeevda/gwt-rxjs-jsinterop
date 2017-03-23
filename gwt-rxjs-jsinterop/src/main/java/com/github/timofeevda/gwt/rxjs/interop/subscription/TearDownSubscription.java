@@ -28,6 +28,6 @@ import jsinterop.annotations.JsType;
  * @author timofeevda since 11/01/2017
  */
 @JsType(isNative = true)
-public interface AnonymousSubscription {
+public interface TearDownSubscription {
     void unsubscribe();
 }
