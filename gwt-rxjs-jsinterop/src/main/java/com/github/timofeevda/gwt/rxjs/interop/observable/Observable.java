@@ -64,6 +64,8 @@ public class Observable<T> {
     public native Observable<T> auditTime(int duration);
 
     public native Observable<T[]> buffer(Observable closingNotifier);
+    
+    public native Observable<T[]> bufferCunt();
 
     public native Observable<T[]> bufferCount(int bufferSize);
 
