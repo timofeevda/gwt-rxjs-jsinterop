@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.github.timofeevda</groupId>
+        <artifactId>gwt-rxjs-jsinterop-parent</artifactId>
+        <version>1.1.5-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>gwt-rxjs-jsinterop-test-bundle</artifactId>
+
+    <packaging>jar</packaging>
+    
+    <name>GWT RxJs JsInterop Tests Bundle</name>
+    <url>https://github.com/timofeevda/gwt-rxjs-jsinterop</url>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.github.timofeevda</groupId>
+            <artifactId>gwt-rxjs-jsinterop-generator</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.timofeevda</groupId>
+            <artifactId>gwt-rxjs-jsinterop</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-user</artifactId>
+            <version>${gwt.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+            <version>2.4.11</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+    
+    <build>
+        <plugins>                                   
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.6.0</version>
+                <executions>
+                    <execution>
+                        <id>generateCode</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                                
+                        <configuration>
+                            <mainClass>com.github.timofeevda.gwt.rxjs.interop.generator.MethodDefinitionsTestsGenerator</mainClass>
+                            <arguments>
+                                <argument>${project.build.directory}/generated-sources/main/com/github/timofeevda/gwt/rxjs/interop/tests</argument>
+                            </arguments>
+                            <classpathScope>compile</classpathScope>
+                        </configuration>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.github.timofeevda</groupId>
+                        <artifactId>gwt-rxjs-jsinterop</artifactId>
+                        <version>${project.version}</version>
+                    </dependency>                            
+                </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>addtoSourceFolder</id>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <directory>${project.build.directory}/generated-sources/main/</directory>
+                            </sources>                              
+                        </configuration>
+                    </execution>                          
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>gwt-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>gwt-resources</id>
+                        <goals>
+                            <goal>resources</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>                   
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+            </plugin>    
+        </plugins>
+    </build>
+       
+</project>

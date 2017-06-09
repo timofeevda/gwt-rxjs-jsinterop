@@ -65,7 +65,6 @@ class TestsContainer {
         return true;
     }
 
-
     @JsMethod(name = "create")
     public boolean testCreate() {
         BooleanHolder teardownTriggered = new BooleanHolder();
@@ -347,6 +346,20 @@ class TestsContainer {
     public void testInterval(Action0 jasmineDone) {
         Subscription subscription = Observable.interval(200).subscribe(v -> jasmineDone.call());
         Observable.timer(400).subscribe(v -> subscription.unsubscribe());
+    }
+    
+    @JsMethod(name = "testBufferCount")
+    public boolean testBufferCount() {
+        StringBuilder sb = new StringBuilder();
+        Observable.of(1, 2, 3).bufferCount(2).subscribe(v -> sb.append(v.length));
+        return sb.toString().equals("21");
+    }
+
+    @JsMethod(name = "testFilter_indexed")
+    public boolean testFilterIndexed() {
+        StringBuilder sb = new StringBuilder();
+        Observable.of(1, 2, 3).filter((v, i) -> v < 3).subscribe(sb::append);
+        return sb.toString().equals("12");
     }
     
 }

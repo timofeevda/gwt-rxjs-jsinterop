@@ -19,8 +19,16 @@
     <dependencies>
         <dependency>
             <groupId>com.github.timofeevda</groupId>
-            <artifactId>gwt-rxjs-jsinterop-generator</artifactId>
+            <artifactId>gwt-rxjs-jsinterop-test-bundle</artifactId>
             <version>${project.version}</version>
+            <scope>provided</scope>                
+        </dependency>
+        <dependency>
+            <groupId>com.github.timofeevda</groupId>
+            <artifactId>gwt-rxjs-jsinterop-test-bundle</artifactId>
+            <version>${project.version}</version>
+            <classifier>sources</classifier>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.github.timofeevda</groupId>
@@ -87,33 +95,7 @@
                     <plugin>
                         <groupId>com.github.searls</groupId>
                         <artifactId>jasmine-maven-plugin</artifactId>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>
-                        <version>1.6.0</version>
-                        <executions>
-                            <execution>
-                                <id>generateCode</id>
-                                <phase>generate-sources</phase>
-                                <goals>
-                                    <goal>java</goal>
-                                </goals>
-                                <configuration>
-                                    <mainClass>com.github.timofeevda.gwt.rxjs.interop.generator.Generator</mainClass>
-                                    <classpathScope>compile</classpathScope>
-                                    <sourceRoot>${project.build.directory}/generated-sources/main/java</sourceRoot>
-                                </configuration>
-                            </execution>
-                        </executions>
-                        <dependencies>
-                            <dependency>
-                                <groupId>com.github.timofeevda</groupId>
-                                <artifactId>gwt-rxjs-jsinterop</artifactId>
-                                <version>${project.version}</version>
-                            </dependency>
-                        </dependencies>
-                    </plugin>
+                    </plugin>                    
                 </plugins>
             </build>
         </profile>

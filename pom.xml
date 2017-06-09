@@ -76,6 +76,7 @@
             </activation>
             <modules>
                 <module>gwt-rxjs-jsinterop</module>
+                <module>gwt-rxjs-jsinterop-test-bundle</module>
                 <module>gwt-rxjs-jsinterop-test</module>
                 <module>gwt-rxjs-jsinterop-onpage</module>
                 <module>gwt-rxjs-jsinterop-generator</module>
