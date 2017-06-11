@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 ### Added
+- methods definitions generator for automatically test methods availability (trying to make migration to new rxjs versions easier)
 
 ## [1.1.4] - 2017-03-23
 ### Added
