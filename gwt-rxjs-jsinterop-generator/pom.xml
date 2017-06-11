@@ -13,7 +13,7 @@
 
     <packaging>jar</packaging>
     
-    <name>GWT RxJs JsInterop Generator</name>
+    <name>GWT RxJs JsInterop Test Definitions Generator</name>
     <url>https://github.com/timofeevda/gwt-rxjs-jsinterop</url>
 
     <dependencies>
