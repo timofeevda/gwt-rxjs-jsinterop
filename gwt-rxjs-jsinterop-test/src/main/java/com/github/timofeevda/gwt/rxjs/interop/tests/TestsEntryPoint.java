@@ -32,14 +32,14 @@ public class TestsEntryPoint implements EntryPoint {
     @Override
     public void onModuleLoad() {
         exportTestsContainer(new TestsContainer());
-        exportSyncTests(new SyncTests());
+        exportGeneratedTests(new MethodsDefinitionsTest());
     }
 
     private native void exportTestsContainer(TestsContainer testsContainer) /*-{
       $wnd.testsContainer = testsContainer;
     }-*/;
 
-    private native void exportSyncTests(SyncTests syncTests) /*-{
-        $wnd.syncTests = syncTests;
+    private native void exportGeneratedTests(MethodsDefinitionsTest test) /*-{
+        $wnd.generatedTests = test;
     }-*/;
 }

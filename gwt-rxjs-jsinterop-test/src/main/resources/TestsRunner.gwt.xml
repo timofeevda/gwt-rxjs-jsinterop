@@ -7,9 +7,9 @@
     <!-- the theme of your GWT application by uncommenting          -->
     <!-- any one of the following lines.                            -->
     <inherits name='com.google.gwt.user.theme.standard.Standard'/>
-
     <inherits name="com.github.timofeevda.gwt.rxjs.interop"/>
-
+    <inherits name="com.github.timofeevda.gwt.rxjs.interop.TestsBundle"/>
+    
     <!-- Specify the app entry point class.                         -->
     <entry-point class='com.github.timofeevda.gwt.rxjs.interop.tests.TestsEntryPoint'/>
 
