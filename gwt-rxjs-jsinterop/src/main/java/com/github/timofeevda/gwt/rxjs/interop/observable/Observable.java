@@ -476,10 +476,16 @@ public class Observable<T> {
     public native Observable<Observable<T>> windowCount(int windowSize, int startWindowEvery);
 
     public native Observable<Observable<T>> windowTime(int windowTimeSpan);
+    
+    public native Observable<Observable<T>> windowTime(int windowTimeSpan, Scheduler scheduler);
 
     public native Observable<Observable<T>> windowTime(int windowTimeSpan, int windowCreationInterval);
-
+    
     public native Observable<Observable<T>> windowTime(int windowTimeSpan, int windowCreationInterval, Scheduler scheduler);
+    
+    public native Observable<Observable<T>> windowTime(int windowTimeSpan, int windowCreationInterval, int maxWindowSize);
+    
+    public native Observable<Observable<T>> windowTime(int windowTimeSpan, int windowCreationInterval, int maxWindowSize, Scheduler scheduler);
 
     public native <O> Observable<Observable<T>> windowToggle(Observable<O> openings, Func1<O, Observable> closingSelector);
 
