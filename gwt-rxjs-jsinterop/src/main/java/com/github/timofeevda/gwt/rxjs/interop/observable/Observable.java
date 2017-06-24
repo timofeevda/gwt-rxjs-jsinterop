@@ -401,6 +401,8 @@ public class Observable<T> {
     public native Observable<T> skipWhile(Predicate<T> predicate);
 
     public native Observable<T> skipWhile(IndexedPredicate<T> indexedPredicate);
+    
+    public native Observable<T> skipLast(int count);
 
     public native Observable<T> startWith(T v1);
 
