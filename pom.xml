@@ -17,6 +17,7 @@
     </prerequisites>
        	
     <properties>
+        <rxjs.supported.version>5.4.1</rxjs.supported.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <gwt.version>2.8.0</gwt.version>
@@ -254,7 +255,7 @@
                             <include>**/spec*.js</include>
                         </specIncludes>
                         <preloadSources>
-                            <source>${basedir}/src/test/resources/Rx.js</source>
+                            <source>https://cdnjs.cloudflare.com/ajax/libs/rxjs/${rxjs.supported.version}/Rx.min.js</source>
                         </preloadSources>
                     </configuration>
                 </plugin>
