@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 ### Added
+- advanced supported rxjs version to 5.4.1 
+- skipLast operator (rxjs 5.4.0)
+- maxWindowSize parameter in windowTime operator
 - methods definitions generator for automatically test methods availability (trying to make migration to new rxjs versions easier)
 
 ## [1.1.4] - 2017-03-23
