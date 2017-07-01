@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
+
+## [1.1.5] - 2017-07-01
 ### Added
 - advanced supported rxjs version to 5.4.1 
 - skipLast operator (rxjs 5.4.0)
