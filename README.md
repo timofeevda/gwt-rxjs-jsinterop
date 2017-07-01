@@ -5,7 +5,12 @@
 
 RxJS JavaScript interoperability bindings for GWT 2.8
 
-Currently supports major functionality of rxjs 5.0.3
+Supported rxjs versions list:
+
+| rxjs          | gwt-rxjs-jsinterop |
+| ------------- | ------------------ |
+| 5.4.1         | >= 1.1.5           |
+| 5.0.3         | <= 1.1.4           |
 
 Add dependency to your pom.xml:
 ```xml
