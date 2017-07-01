@@ -23,6 +23,6 @@ Update your GWT module with the following line:
 
 Don't forget to add actual [rxjs](https://github.com/ReactiveX/rxjs) library to page resources
 
-Notes: for building on Linux systems add -Dphantomjs.binary option pointing it to PhantomJS binary location. On Windows PhantomJS is installed automatically during build.
+**Note**: for building on Linux systems add -Dphantomjs.binary option pointing it to PhantomJS binary location. On Windows PhantomJS is installed automatically during build.
 
 
