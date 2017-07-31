@@ -76,8 +76,13 @@ describe("Observable operators", function () {
         done();
     });
 
-    it("must provide merging", function (done) {
-        expect(testsContainer.merge()).toBe("12");
+    it("must provide merging of two", function (done) {
+        expect(testsContainer.mergeTwo()).toBe("12");
+        done();
+    });
+
+    it("must provide merging of three", function (done) {
+        expect(testsContainer.mergeThree()).toBe("123");
         done();
     });
 

@@ -133,10 +133,17 @@ class TestsContainer {
         return bh.value;
     }
 
-    @JsMethod(name = "merge")
-    public String testMerge() {
+    @JsMethod(name = "mergeTwo")
+    public String testMergeTwo() {
         final StringHolder sh = new StringHolder();
-        Observable.merge(Observable.of("1"), Observable.of("2")).subscribe(v -> sh.value += v);
+        Observable.mergeStatic(Observable.of("1"), Observable.of("2")).subscribe(v -> sh.value += v);
+        return sh.value;
+    }
+
+    @JsMethod(name = "mergeThree")
+    public String testMergeThree() {
+        final StringHolder sh = new StringHolder();
+        Observable.mergeStatic(Observable.of("1"), Observable.of("2"), Observable.of("3")).subscribe(v -> sh.value += v);
         return sh.value;
     }
 

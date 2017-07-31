@@ -258,7 +258,86 @@ public class Observable<T> {
 
     public native Observable<T> max(Comparator<? super T> comparator);
 
-    public native static <T> Observable<T> merge(Observable<T> first, Observable<T> second);
+    @JsMethod(name = "merge")
+    public native static <T> Observable<T> mergeStatic(Observable<T> v1, Observable<T> v2);
+
+    @JsMethod(name = "merge")
+    public native static <T> Observable<T> mergeStatic(Observable<T> v1, Observable<T> v2, int concurrent);
+
+    @JsMethod(name = "merge")
+    public native static <T> Observable<T> mergeStatic(Observable<T> v1, Observable<T> v2, int concurrent, Scheduler scheduler);
+
+    @JsMethod(name = "merge")
+    public native static <T> Observable<T> mergeStatic(Observable<T> v1, Observable<T> v2, Observable<T> v3);
+
+    @JsMethod(name = "merge")
+    public native static <T> Observable<T> mergeStatic(Observable<T> v1, Observable<T> v2, Observable<T> v3, int concurrent);
+
+    @JsMethod(name = "merge")
+    public native static <T> Observable<T> mergeStatic(Observable<T> v1, Observable<T> v2, Observable<T> v3, int concurrent, Scheduler scheduler);
+
+    @JsMethod(name = "merge")
+    public native static <T> Observable<T> mergeStatic(Observable<T> v1, Observable<T> v2, Observable<T> v3, Observable<T> v4);
+
+    @JsMethod(name = "merge")
+    public native static <T> Observable<T> mergeStatic(Observable<T> v1, Observable<T> v2, Observable<T> v3, Observable<T> v4, int concurrent);
+
+    @JsMethod(name = "merge")
+    public native static <T> Observable<T> mergeStatic(Observable<T> v1, Observable<T> v2, Observable<T> v3, Observable<T> v4, int concurrent, Scheduler scheduler);
+
+    @JsMethod(name = "merge")
+    public native static <T> Observable<T> mergeStatic(Observable<T> v1, Observable<T> v2, Observable<T> v3, Observable<T> v4, Observable<T> v5);
+
+    @JsMethod(name = "merge")
+    public native static <T> Observable<T> mergeStatic(Observable<T> v1, Observable<T> v2, Observable<T> v3, Observable<T> v4, Observable<T> v5, int concurrent);
+
+    @JsMethod(name = "merge")
+    public native static <T> Observable<T> mergeStatic(Observable<T> v1, Observable<T> v2, Observable<T> v3, Observable<T> v4, Observable<T> v5, int concurrent, Scheduler scheduler);
+
+    @JsMethod(name = "merge")
+    public native static <T> Observable<T> mergeStatic(Observable<T> v1, Observable<T> v2, Observable<T> v3, Observable<T> v4, Observable<T> v5, Observable<T> v6);
+
+    @JsMethod(name = "merge")
+    public native static <T> Observable<T> mergeStatic(Observable<T> v1, Observable<T> v2, Observable<T> v3, Observable<T> v4, Observable<T> v5, Observable<T> v6, int concurrent);
+
+    @JsMethod(name = "merge")
+    public native static <T> Observable<T> mergeStatic(Observable<T> v1, Observable<T> v2, Observable<T> v3, Observable<T> v4, Observable<T> v5, Observable<T> v6, int concurrent, Scheduler scheduler);
+
+    public native <T> Observable<T> merge(Observable<T> v1);
+
+    public native <T> Observable<T> merge(Observable<T> v1, Scheduler scheduler);
+
+    public native <T> Observable<T> merge(Observable<T> v1, int concurrent, Scheduler scheduler);
+
+    public native <T> Observable<T> merge(Observable<T> v1, Observable<T> v2);
+
+    public native <T> Observable<T> merge(Observable<T> v1, Observable<T> v2, Scheduler scheduler);
+
+    public native <T> Observable<T> merge(Observable<T> v1, Observable<T> v2, int concurrent, Scheduler scheduler);
+
+    public native <T> Observable<T> merge(Observable<T> v1, Observable<T> v2, Observable<T> v3);
+
+    public native <T> Observable<T> merge(Observable<T> v1, Observable<T> v2, Observable<T> v3, Scheduler scheduler);
+
+    public native <T> Observable<T> merge(Observable<T> v1, Observable<T> v2, Observable<T> v3, int concurrent, Scheduler scheduler);
+
+    public native <T> Observable<T> merge(Observable<T> v1, Observable<T> v2, Observable<T> v3, Observable<T> v4);
+
+    public native <T> Observable<T> merge(Observable<T> v1, Observable<T> v2, Observable<T> v3, Observable<T> v4, Scheduler scheduler);
+
+    public native <T> Observable<T> merge(Observable<T> v1, Observable<T> v2, Observable<T> v3, Observable<T> v4, int concurrent, Scheduler scheduler);
+
+    public native <T> Observable<T> merge(Observable<T> v1, Observable<T> v2, Observable<T> v3, Observable<T> v4, Observable<T> v5);
+
+    public native <T> Observable<T> merge(Observable<T> v1, Observable<T> v2, Observable<T> v3, Observable<T> v4, Observable<T> v5, Scheduler scheduler);
+
+    public native <T> Observable<T> merge(Observable<T> v1, Observable<T> v2, Observable<T> v3, Observable<T> v4,  Observable<T> v5, int concurrent, Scheduler scheduler);
+
+    public native <T> Observable<T> merge(Observable<T> v1, Observable<T> v2, Observable<T> v3, Observable<T> v4, Observable<T> v5, Observable<T> v6);
+
+    public native <T> Observable<T> merge(Observable<T> v1, Observable<T> v2, Observable<T> v3, Observable<T> v4, Observable<T> v5, Observable<T> v6, Scheduler scheduler);
+
+    public native <T> Observable<T> merge(Observable<T> v1, Observable<T> v2, Observable<T> v3, Observable<T> v4,  Observable<T> v5, Observable<T> v6, int concurrent, Scheduler scheduler);
 
     public native Observable<T> mergeAll();
 
@@ -271,6 +350,16 @@ public class Observable<T> {
     public native <I, R> Observable<R> mergeMap(Projector<? super T, ? extends R> projector, ResultSelector<? super T, ? super I, ? extends R> resultSelector);
 
     public native <I, R> Observable<R> mergeMap(Projector<? super T, ? extends R> projector, ResultSelector<? super T, ? super I, ? extends R> resultSelector, int concurrent);
+
+    public native <R> Observable<R> flapMap(Projector<? super T, ? extends R> projector);
+
+    public native <R> Observable<R> flatMap(Projector<? super T, ? extends R> projector);
+
+    public native <R> Observable<R> flatMap(Projector<? super T, ? extends R> projector, int concurrent);
+
+    public native <I, R> Observable<R> flatMap(Projector<? super T, ? extends R> projector, ResultSelector<? super T, ? super I, ? extends R> resultSelector);
+
+    public native <I, R> Observable<R> flatMap(Projector<? super T, ? extends R> projector, ResultSelector<? super T, ? super I, ? extends R> resultSelector, int concurrent);
 
     public native <R> Observable<R> mergeMapTo(Observable<? extends R> innerObservable);
 
