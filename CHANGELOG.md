@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
+### Added
+- convenient flatMap declarations
+- added missing "merge" declarations
 
 ## [1.1.5] - 2017-07-01
 ### Added
