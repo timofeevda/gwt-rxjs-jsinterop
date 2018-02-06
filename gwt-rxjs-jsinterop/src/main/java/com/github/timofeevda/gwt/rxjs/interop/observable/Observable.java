@@ -173,10 +173,10 @@ public class Observable<T> {
     public native Observable<Boolean> every(IndexedSourcePredicate<T> predicate);
 
     @JsMethod(name = "throw")
-    public native static Observable _throw(Object error);
+    public native static <R> Observable<R> _throw(Object error);
 
     @JsMethod(name = "throw")
-    public native static Observable _throw(Object error, Scheduler scheduler);
+    public native static <R> Observable<R> _throw(Object error, Scheduler scheduler);
 
     public native Observable<T> exhaust();
 
@@ -412,6 +412,8 @@ public class Observable<T> {
     public native Observable<T[]> pairwise();
 
     public native Observable<T>[] partition(Func1<? super T, Boolean> predicate);
+
+    public native <R> Observable<R> pluck(String... properties);
 
     public native ConnectableObservable<T> publish();
 
