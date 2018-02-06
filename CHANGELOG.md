@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 ### Added
+
+## [1.1.6] - 2018-01-06
+### Added
 - fixed "withLatestFrom" definitions
 - convenient flatMap declarations
 - added missing "merge" declarations
