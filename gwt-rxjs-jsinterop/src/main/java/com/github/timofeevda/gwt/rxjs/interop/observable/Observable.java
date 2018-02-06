@@ -582,16 +582,19 @@ public class Observable<T> {
 
     public native <O> Observable<Observable<T>> windowWhen(Observable closingSelector);
 
+    public native <T1, R> Observable<R> withLatestFrom(Observable<? extends T1> v1,
+            Func2<? super T, ? super T1, ? extends R> combineFunction);
+
     public native <T1, T2, R> Observable<R> withLatestFrom(Observable<? extends T1> v1, Observable<? extends T2> v2,
-            Func2<? super T1, ? super T2, ? extends R> combineFunction);
+            Func3<? super T, ? super T1, ? super T2, ? extends R> combineFunction);
 
     public native <T1, T2, T3, R> Observable<R> withLatestFrom(Observable<? extends T1> v1,
             Observable<? extends T2> v2, Observable<? extends T3> v3,
-            Func3<? super T1, ? super T2, ? super T3, ? extends R> combineFunction);
+            Func4<? super T, ? super T1, ? super T2, ? super T3, ? extends R> combineFunction);
 
     public native <T1, T2, T3, T4, R> Observable<R> withLatestFrom(Observable<? extends T1> v1,
             Observable<? extends T2> v2, Observable<? extends T3> v3, Observable<? extends T4> v4,
-            Func4<? super T1, ? super T2, ? super T3, ? super T4, ? extends R> combineFunction);
+            Func5<? super T, ? super T1, ? super T2, ? super T3, ? super T4, ? extends R> combineFunction);
 
     public native <R> Observable<R> zip(Func1<? super T, ? extends R> projectFunction);
 
