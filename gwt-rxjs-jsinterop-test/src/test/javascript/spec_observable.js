@@ -205,6 +205,10 @@ describe("Observable operators", function () {
         expect(testsContainer.throw()).toBe("1");
         done();
     });
+    it("must provide \"withLatestFrom\"", function (done) {
+        expect(testsContainer.testWithLatestFrom()).toBeTruthy();
+        done();
+    });
 });
 
 describe("Schedulers", function () {

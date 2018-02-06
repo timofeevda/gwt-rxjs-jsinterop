@@ -368,5 +368,12 @@ class TestsContainer {
         Observable.of(1, 2, 3).filter((v, i) -> v < 3).subscribe(sb::append);
         return sb.toString().equals("12");
     }
+
+    @JsMethod(name = "testWithLatestFrom")
+    public boolean testWithLatestFrom() {
+        StringBuilder sb = new StringBuilder();
+        Observable.of(1, 2, 3).withLatestFrom(Observable.of(0, 2), (i1, i2) -> i1 * i2).subscribe(sb::append);
+        return sb.toString().equals("246");
+    }
     
 }
