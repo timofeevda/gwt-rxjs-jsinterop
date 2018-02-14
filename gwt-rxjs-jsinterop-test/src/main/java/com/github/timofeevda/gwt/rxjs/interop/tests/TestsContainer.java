@@ -136,14 +136,14 @@ class TestsContainer {
     @JsMethod(name = "mergeTwo")
     public String testMergeTwo() {
         final StringHolder sh = new StringHolder();
-        Observable.mergeStatic(Observable.of("1"), Observable.of("2")).subscribe(v -> sh.value += v);
+        Observable.merge(Observable.of("1"), Observable.of("2")).subscribe(v -> sh.value += v);
         return sh.value;
     }
 
     @JsMethod(name = "mergeThree")
     public String testMergeThree() {
         final StringHolder sh = new StringHolder();
-        Observable.mergeStatic(Observable.of("1"), Observable.of("2"), Observable.of("3")).subscribe(v -> sh.value += v);
+        Observable.merge(Observable.of("1"), Observable.of("2"), Observable.of("3")).subscribe(v -> sh.value += v);
         return sh.value;
     }
 
@@ -325,7 +325,7 @@ class TestsContainer {
     @JsMethod(name = "partition")
     public String testPartition() {
         final StringHolder sh = new StringHolder();
-        Observable<String>[] obs = Observable.of("1", "3").partition(v -> v.equals("3"));
+        Observable<String>[] obs = Observable.of("1", "3").partition((v, i) -> v.equals("3"));
         obs[1].subscribe(v -> sh.value += v);
         return sh.value;
     }

@@ -21,10 +21,6 @@
  */
 package com.github.timofeevda.gwt.rxjs.interop.observable;
 
-import jsinterop.annotations.JsFunction;
-import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsType;
-import com.github.timofeevda.gwt.rxjs.interop.subject.Subject;
 import com.github.timofeevda.gwt.rxjs.interop.functions.Action0;
 import com.github.timofeevda.gwt.rxjs.interop.functions.Action1;
 import com.github.timofeevda.gwt.rxjs.interop.functions.Func1;
@@ -33,16 +29,19 @@ import com.github.timofeevda.gwt.rxjs.interop.functions.Func3;
 import com.github.timofeevda.gwt.rxjs.interop.functions.Func4;
 import com.github.timofeevda.gwt.rxjs.interop.functions.Func5;
 import com.github.timofeevda.gwt.rxjs.interop.functions.Func6;
-import com.github.timofeevda.gwt.rxjs.interop.functions.FuncN;
 import com.github.timofeevda.gwt.rxjs.interop.functions.Producer;
-import com.github.timofeevda.gwt.rxjs.interop.scheduler.Scheduler;
-import com.github.timofeevda.gwt.rxjs.interop.subscription.Subscription;
 import com.github.timofeevda.gwt.rxjs.interop.functions.ProjectWithArray;
+import com.github.timofeevda.gwt.rxjs.interop.scheduler.Scheduler;
+import com.github.timofeevda.gwt.rxjs.interop.subject.Subject;
+import com.github.timofeevda.gwt.rxjs.interop.subscription.Subscription;
 import com.google.gwt.dom.client.Element;
+import jsinterop.annotations.JsFunction;
+import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsType;
 
 /**
- * @author dtimofeev since 20.12.2016.
  * @param <T>
+ * @author dtimofeev since 20.12.2016.
  */
 @JsType(namespace = "Rx", isNative = true)
 @SuppressWarnings("unused")
@@ -64,7 +63,7 @@ public class Observable<T> {
     public native Observable<T> auditTime(int duration);
 
     public native Observable<T[]> buffer(Observable closingNotifier);
-    
+
     public native Observable<T[]> bufferCount(int bufferSize);
 
     public native Observable<T[]> bufferCount(int bufferSize, int startBufferEvery);
@@ -87,19 +86,65 @@ public class Observable<T> {
     public native <R> Observable<R> combineAll(Func1<T[], ? extends R> mapper);
 
     public native static <T1, T2, R> Observable<R> combineLatest(Observable<? extends T1> v1, Observable<? extends T2> v2,
-            Func2<? super T1, ? super T2, ? extends R> combineFunction);
+                                                                 Func2<? super T1, ? super T2, ? extends R> combineFunction);
 
     public native static <T1, T2, T3, R> Observable<R> combineLatest(Observable<? extends T1> v1,
-            Observable<? extends T2> v2, Observable<? extends T3> v3,
-            Func3<? super T1, ? super T2, ? super T3, ? extends R> combineFunction);
+                                                                     Observable<? extends T2> v2, Observable<? extends T3> v3,
+                                                                     Func3<? super T1, ? super T2, ? super T3, ? extends R> combineFunction);
 
     public native static <T1, T2, T3, T4, R> Observable<R> combineLatest(Observable<? extends T1> v1,
-            Observable<? extends T2> v2, Observable<? extends T3> v3, Observable<? extends T4> v4,
-            Func4<? super T1, ? super T2, ? super T3, ? super T4, ? extends R> combineFunction);
+                                                                         Observable<? extends T2> v2, Observable<? extends T3> v3, Observable<? extends T4> v4,
+                                                                         Func4<? super T1, ? super T2, ? super T3, ? super T4, ? extends R> combineFunction);
 
-    public native static <T, R> Observable<R> combineLatest(Iterable<? extends Observable<? extends T>> observables, FuncN<? extends R> combineFunction);
+    public native static <T1, T2, T3, T4, T5, R> Observable<R> combineLatest(Observable<? extends T1> v1,
+                                                                             Observable<? extends T2> v2, Observable<? extends T3> v3, Observable<? extends T4> v4,
+                                                                             Observable<? extends T5> v5,
+                                                                             Func5<? super T1, ? super T2, ? super T3, ? super T4, ? super T5, ? extends R> combineFunction);
 
-    public native static <T> Observable<T> combineLatest(Observable<? extends T>[] observables);
+
+    public native static <T1, T2, T3, T4, T5, T6, R> Observable<R> combineLatest(Observable<? extends T1> v1,
+                                                                                 Observable<? extends T2> v2, Observable<? extends T3> v3, Observable<? extends T4> v4,
+                                                                                 Observable<? extends T5> v5, Observable<? extends T6> v6,
+                                                                                 Func6<? super T1, ? super T2, ? super T3, ? super T4, ? super T5, ? super T6, ? extends R> combineFunction);
+
+    public native static <T> Observable<T[]> combineLatest(Observable<? extends T> v1, Observable<? extends T> v2);
+
+
+    public native static <T> Observable<T[]> combineLatest(Observable<? extends T> v1,
+                                                           Observable<? extends T> v2, Observable<? extends T> v3);
+
+    public native static <T> Observable<T[]> combineLatest(Observable<? extends T> v1,
+                                                           Observable<? extends T> v2, Observable<? extends T> v3, Observable<? extends T> v4);
+
+    public native static <T> Observable<T> combineLatest(Observable<? extends T> v1,
+                                                         Observable<? extends T> v2, Observable<? extends T> v3, Observable<? extends T> v4,
+                                                         Observable<? extends T> v5);
+
+    public native static <T> Observable<T> combineLatest(Observable<? extends T> v1,
+                                                         Observable<? extends T> v2, Observable<? extends T> v3, Observable<? extends T> v4,
+                                                         Observable<? extends T> v5, Observable<? extends T> v6);
+
+    public native static <T> Observable<T[]> combineLatest(Observable<? extends T> v1, Observable<? extends T> v2, Scheduler scheduler);
+
+    public native static <T> Observable<T[]> combineLatest(Observable<? extends T> v1,
+                                                           Observable<? extends T> v2, Observable<? extends T> v3, Scheduler scheduler);
+
+    public native static <T> Observable<T[]> combineLatest(Observable<? extends T> v1,
+                                                           Observable<? extends T> v2, Observable<? extends T> v3, Observable<? extends T> v4, Scheduler scheduler);
+
+    public native static <T> Observable<T> combineLatest(Observable<? extends T> v1,
+                                                         Observable<? extends T> v2, Observable<? extends T> v3, Observable<? extends T> v4,
+                                                         Observable<? extends T> v5, Scheduler scheduler);
+
+
+    public native static <T> Observable<T> combineLatest(Observable<? extends T> v1,
+                                                         Observable<? extends T> v2, Observable<? extends T> v3, Observable<? extends T> v4,
+                                                         Observable<? extends T> v5, Observable<? extends T> v6, Scheduler scheduler);
+
+
+    public native static <T> Observable<T[]> combineLatest(Observable<? extends T>[] observables);
+
+    public native static <T> Observable<T[]> combineLatest(Iterable<? extends Observable<? extends T>> observables);
 
     public native Observable<T> concat(Observable<? extends T> v1);
 
@@ -244,7 +289,7 @@ public class Observable<T> {
 
     public native <R> Observable<R> last(IndexedPredicate<? super T> indexedPredicate, IndexedResultSelector<? super T, ? extends R> resultSelector);
 
-    public native <R> Observable<R> last(Predicate<? super T> predicate, IndexedResultSelector<? super T, ? extends  R> resultSelector, R defaultValue);
+    public native <R> Observable<R> last(Predicate<? super T> predicate, IndexedResultSelector<? super T, ? extends R> resultSelector, R defaultValue);
 
     public native <R> Observable<R> last(IndexedPredicate<? super T> indexedPredicate, IndexedResultSelector<? super T, ? extends R> resultSelector, R defaultValue);
 
@@ -259,85 +304,49 @@ public class Observable<T> {
     public native Observable<T> max(Comparator<? super T> comparator);
 
     @JsMethod(name = "merge")
-    public native static <T> Observable<T> mergeStatic(Observable<T> v1, Observable<T> v2);
+    public native static <T> Observable<T> merge(Observable<T> v1, Observable<T> v2);
 
     @JsMethod(name = "merge")
-    public native static <T> Observable<T> mergeStatic(Observable<T> v1, Observable<T> v2, int concurrent);
+    public native static <T> Observable<T> merge(Observable<T> v1, Observable<T> v2, int concurrent);
 
     @JsMethod(name = "merge")
-    public native static <T> Observable<T> mergeStatic(Observable<T> v1, Observable<T> v2, int concurrent, Scheduler scheduler);
+    public native static <T> Observable<T> merge(Observable<T> v1, Observable<T> v2, int concurrent, Scheduler scheduler);
 
     @JsMethod(name = "merge")
-    public native static <T> Observable<T> mergeStatic(Observable<T> v1, Observable<T> v2, Observable<T> v3);
+    public native static <T> Observable<T> merge(Observable<T> v1, Observable<T> v2, Observable<T> v3);
 
     @JsMethod(name = "merge")
-    public native static <T> Observable<T> mergeStatic(Observable<T> v1, Observable<T> v2, Observable<T> v3, int concurrent);
+    public native static <T> Observable<T> merge(Observable<T> v1, Observable<T> v2, Observable<T> v3, int concurrent);
 
     @JsMethod(name = "merge")
-    public native static <T> Observable<T> mergeStatic(Observable<T> v1, Observable<T> v2, Observable<T> v3, int concurrent, Scheduler scheduler);
+    public native static <T> Observable<T> merge(Observable<T> v1, Observable<T> v2, Observable<T> v3, int concurrent, Scheduler scheduler);
 
     @JsMethod(name = "merge")
-    public native static <T> Observable<T> mergeStatic(Observable<T> v1, Observable<T> v2, Observable<T> v3, Observable<T> v4);
+    public native static <T> Observable<T> merge(Observable<T> v1, Observable<T> v2, Observable<T> v3, Observable<T> v4);
 
     @JsMethod(name = "merge")
-    public native static <T> Observable<T> mergeStatic(Observable<T> v1, Observable<T> v2, Observable<T> v3, Observable<T> v4, int concurrent);
+    public native static <T> Observable<T> merge(Observable<T> v1, Observable<T> v2, Observable<T> v3, Observable<T> v4, int concurrent);
 
     @JsMethod(name = "merge")
-    public native static <T> Observable<T> mergeStatic(Observable<T> v1, Observable<T> v2, Observable<T> v3, Observable<T> v4, int concurrent, Scheduler scheduler);
+    public native static <T> Observable<T> merge(Observable<T> v1, Observable<T> v2, Observable<T> v3, Observable<T> v4, int concurrent, Scheduler scheduler);
 
     @JsMethod(name = "merge")
-    public native static <T> Observable<T> mergeStatic(Observable<T> v1, Observable<T> v2, Observable<T> v3, Observable<T> v4, Observable<T> v5);
+    public native static <T> Observable<T> merge(Observable<T> v1, Observable<T> v2, Observable<T> v3, Observable<T> v4, Observable<T> v5);
 
     @JsMethod(name = "merge")
-    public native static <T> Observable<T> mergeStatic(Observable<T> v1, Observable<T> v2, Observable<T> v3, Observable<T> v4, Observable<T> v5, int concurrent);
+    public native static <T> Observable<T> merge(Observable<T> v1, Observable<T> v2, Observable<T> v3, Observable<T> v4, Observable<T> v5, int concurrent);
 
     @JsMethod(name = "merge")
-    public native static <T> Observable<T> mergeStatic(Observable<T> v1, Observable<T> v2, Observable<T> v3, Observable<T> v4, Observable<T> v5, int concurrent, Scheduler scheduler);
+    public native static <T> Observable<T> merge(Observable<T> v1, Observable<T> v2, Observable<T> v3, Observable<T> v4, Observable<T> v5, int concurrent, Scheduler scheduler);
 
     @JsMethod(name = "merge")
-    public native static <T> Observable<T> mergeStatic(Observable<T> v1, Observable<T> v2, Observable<T> v3, Observable<T> v4, Observable<T> v5, Observable<T> v6);
+    public native static <T> Observable<T> merge(Observable<T> v1, Observable<T> v2, Observable<T> v3, Observable<T> v4, Observable<T> v5, Observable<T> v6);
 
     @JsMethod(name = "merge")
-    public native static <T> Observable<T> mergeStatic(Observable<T> v1, Observable<T> v2, Observable<T> v3, Observable<T> v4, Observable<T> v5, Observable<T> v6, int concurrent);
+    public native static <T> Observable<T> merge(Observable<T> v1, Observable<T> v2, Observable<T> v3, Observable<T> v4, Observable<T> v5, Observable<T> v6, int concurrent);
 
     @JsMethod(name = "merge")
-    public native static <T> Observable<T> mergeStatic(Observable<T> v1, Observable<T> v2, Observable<T> v3, Observable<T> v4, Observable<T> v5, Observable<T> v6, int concurrent, Scheduler scheduler);
-
-    public native <T> Observable<T> merge(Observable<T> v1);
-
-    public native <T> Observable<T> merge(Observable<T> v1, Scheduler scheduler);
-
-    public native <T> Observable<T> merge(Observable<T> v1, int concurrent, Scheduler scheduler);
-
-    public native <T> Observable<T> merge(Observable<T> v1, Observable<T> v2);
-
-    public native <T> Observable<T> merge(Observable<T> v1, Observable<T> v2, Scheduler scheduler);
-
-    public native <T> Observable<T> merge(Observable<T> v1, Observable<T> v2, int concurrent, Scheduler scheduler);
-
-    public native <T> Observable<T> merge(Observable<T> v1, Observable<T> v2, Observable<T> v3);
-
-    public native <T> Observable<T> merge(Observable<T> v1, Observable<T> v2, Observable<T> v3, Scheduler scheduler);
-
-    public native <T> Observable<T> merge(Observable<T> v1, Observable<T> v2, Observable<T> v3, int concurrent, Scheduler scheduler);
-
-    public native <T> Observable<T> merge(Observable<T> v1, Observable<T> v2, Observable<T> v3, Observable<T> v4);
-
-    public native <T> Observable<T> merge(Observable<T> v1, Observable<T> v2, Observable<T> v3, Observable<T> v4, Scheduler scheduler);
-
-    public native <T> Observable<T> merge(Observable<T> v1, Observable<T> v2, Observable<T> v3, Observable<T> v4, int concurrent, Scheduler scheduler);
-
-    public native <T> Observable<T> merge(Observable<T> v1, Observable<T> v2, Observable<T> v3, Observable<T> v4, Observable<T> v5);
-
-    public native <T> Observable<T> merge(Observable<T> v1, Observable<T> v2, Observable<T> v3, Observable<T> v4, Observable<T> v5, Scheduler scheduler);
-
-    public native <T> Observable<T> merge(Observable<T> v1, Observable<T> v2, Observable<T> v3, Observable<T> v4,  Observable<T> v5, int concurrent, Scheduler scheduler);
-
-    public native <T> Observable<T> merge(Observable<T> v1, Observable<T> v2, Observable<T> v3, Observable<T> v4, Observable<T> v5, Observable<T> v6);
-
-    public native <T> Observable<T> merge(Observable<T> v1, Observable<T> v2, Observable<T> v3, Observable<T> v4, Observable<T> v5, Observable<T> v6, Scheduler scheduler);
-
-    public native <T> Observable<T> merge(Observable<T> v1, Observable<T> v2, Observable<T> v3, Observable<T> v4,  Observable<T> v5, Observable<T> v6, int concurrent, Scheduler scheduler);
+    public native static <T> Observable<T> merge(Observable<T> v1, Observable<T> v2, Observable<T> v3, Observable<T> v4, Observable<T> v5, Observable<T> v6, int concurrent, Scheduler scheduler);
 
     public native Observable<T> mergeAll();
 
@@ -383,11 +392,17 @@ public class Observable<T> {
 
     public native ConnectableObservable<T> multicast(Subject<? extends T> subject, Selector<? super T> selector);
 
-    public native ConnectableObservable<T> multicast(Factory<Subject<? extends T>> subjectFactory, Selector<? extends T> selector);
+    public native <R> ConnectableObservable<R> multicast(Subject<? extends T> subject, OperatorFunction<T, R> operatorFunction);
+
+    public native ConnectableObservable<T> multicast(Factory<Subject<? extends T>> subjectFactory, Selector<? extends T> monotypeSelector);
+
+    public native <R> ConnectableObservable<R> multicast(Factory<Subject<? extends T>> subjectFactory, OperatorFunction<T, R> operatorFunction);
 
     public native static <T> Observable<T> multicast(SubjectFactory<? extends T> subjectFactory);
 
-    public native static <T> Observable<T> multicast(SubjectFactory<? extends T> subjectFactory, Selector<? extends T> selector);
+    public native static <T> Observable<T> multicast(SubjectFactory<? extends T> subjectFactory, Selector<? extends T> monotypeSelector);
+
+    public native static <T, R> Observable<R> multicast(SubjectFactory<? extends T> subjectFactory, OperatorFunction<T, R> operatorFunction);
 
     public native static <T> Observable<T> never();
 
@@ -411,13 +426,15 @@ public class Observable<T> {
 
     public native Observable<T[]> pairwise();
 
-    public native Observable<T>[] partition(Func1<? super T, Boolean> predicate);
+    public native Observable<T>[] partition(Func2<? super T, Integer, Boolean> predicate);
 
     public native <R> Observable<R> pluck(String... properties);
 
     public native ConnectableObservable<T> publish();
 
     public native ConnectableObservable<T> publish(Selector<? super T> selector);
+
+    public native <R> ConnectableObservable<R> publish(OperatorFunction<T, R> operatorFunction);
 
     public native <R extends T> ConnectableObservable<T> publishBehavior(R value);
 
@@ -430,6 +447,10 @@ public class Observable<T> {
     public native ConnectableObservable<T> publishReplay(int bufferSize, int windowTime);
 
     public native ConnectableObservable<T> publishReplay(int bufferSize, int windowTime, Scheduler scheduler);
+
+    public native ConnectableObservable<T> publishReplay(int bufferSize, int windowTime, Selector<? extends T> selector, Scheduler scheduler);
+
+    public native <R> ConnectableObservable<R> publishReplay(int bufferSize, int windowTime, OperatorFunction<T, R> operatorFunction, Scheduler scheduler);
 
     public native static <T> Observable<T> race(Observable<? extends T> v1, Observable<? extends T> v2);
 
@@ -492,7 +513,7 @@ public class Observable<T> {
     public native Observable<T> skipWhile(Predicate<T> predicate);
 
     public native Observable<T> skipWhile(IndexedPredicate<T> indexedPredicate);
-    
+
     public native Observable<T> skipLast(int count);
 
     public native Observable<T> startWith(T v1);
@@ -569,15 +590,15 @@ public class Observable<T> {
     public native Observable<Observable<T>> windowCount(int windowSize, int startWindowEvery);
 
     public native Observable<Observable<T>> windowTime(int windowTimeSpan);
-    
+
     public native Observable<Observable<T>> windowTime(int windowTimeSpan, Scheduler scheduler);
 
     public native Observable<Observable<T>> windowTime(int windowTimeSpan, int windowCreationInterval);
-    
+
     public native Observable<Observable<T>> windowTime(int windowTimeSpan, int windowCreationInterval, Scheduler scheduler);
-    
+
     public native Observable<Observable<T>> windowTime(int windowTimeSpan, int windowCreationInterval, int maxWindowSize);
-    
+
     public native Observable<Observable<T>> windowTime(int windowTimeSpan, int windowCreationInterval, int maxWindowSize, Scheduler scheduler);
 
     public native <O> Observable<Observable<T>> windowToggle(Observable<O> openings, Func1<O, Observable> closingSelector);
@@ -585,69 +606,54 @@ public class Observable<T> {
     public native <O> Observable<Observable<T>> windowWhen(Observable closingSelector);
 
     public native <T1, R> Observable<R> withLatestFrom(Observable<? extends T1> v1,
-            Func2<? super T, ? super T1, ? extends R> combineFunction);
+                                                       Func2<? super T, ? super T1, ? extends R> combineFunction);
 
     public native <T1, T2, R> Observable<R> withLatestFrom(Observable<? extends T1> v1, Observable<? extends T2> v2,
-            Func3<? super T, ? super T1, ? super T2, ? extends R> combineFunction);
+                                                           Func3<? super T, ? super T1, ? super T2, ? extends R> combineFunction);
 
     public native <T1, T2, T3, R> Observable<R> withLatestFrom(Observable<? extends T1> v1,
-            Observable<? extends T2> v2, Observable<? extends T3> v3,
-            Func4<? super T, ? super T1, ? super T2, ? super T3, ? extends R> combineFunction);
+                                                               Observable<? extends T2> v2, Observable<? extends T3> v3,
+                                                               Func4<? super T, ? super T1, ? super T2, ? super T3, ? extends R> combineFunction);
 
     public native <T1, T2, T3, T4, R> Observable<R> withLatestFrom(Observable<? extends T1> v1,
-            Observable<? extends T2> v2, Observable<? extends T3> v3, Observable<? extends T4> v4,
-            Func5<? super T, ? super T1, ? super T2, ? super T3, ? super T4, ? extends R> combineFunction);
-
-    public native <R> Observable<R> zip(Func1<? super T, ? extends R> projectFunction);
-
-    public native <T2, R> Observable<R> zip(Observable<? extends T2> v2,
-            Func2<? super T, ? super T2, ? extends R> projectFunction);
-
-    public native <T2, T3, R> Observable<R> zip(Observable<? extends T2> v2, Observable<? extends T3> v3,
-            Func3<? super T, ? super T2, ? super T3, ? extends R> projectFunction);
-
-    public native <T2, T3, T4, R> Observable<R> zip(
-            Observable<? extends T2> v2, Observable<? extends T3> v3, Observable<? extends T4> v4,
-            Func4<? super T, ? super T2, ? super T3, ? super T4, ? extends R> projectFunction);
-
-    public native <T2, T3, T4, T5, R> Observable<R> zip(
-            Observable<? extends T2> v2, Observable<? extends T3> v3, Observable<? extends T4> v4, Observable<? extends T5> v5,
-            Func5<? super T, ? super T2, ? super T3, ? super T4, ? super T5, ? extends R> projectFunction);
-
-    public native <T2, T3, T4, T5, T6, R> Observable<R> zip(
-            Observable<? extends T2> v2, Observable<? extends T3> v3, Observable<? extends T4> v4, Observable<? extends T5> v5, Observable<? extends T6> v6,
-            Func6<? super T, ? super T2, ? super T3, ? super T4, ? super T5, ? super T6, ? extends R> projectFunction);
-
-    public native <T2> Observable<T[]> zip(Observable<? extends T2> v2);
-
-    public native <T2, T3> Observable<T[]> zip(Observable<? extends T2> v2, Observable<? extends T3> v3);
-
-    public native <T2, T3, T4> Observable<T[]> zip(Observable<? extends T2> v2, Observable<? extends T3> v3, Observable<? extends T4> v4);
-
-    public native <T2, T3, T4, T5> Observable<T[]> zip(Observable<? extends T2> v2, Observable<? extends T3> v3, Observable<? extends T4> v4, Observable<? extends T5> v5);
-
-    public native <T2, T3, T4, T5, T6> Observable<T[]> zip(Observable<? extends T2> v2, Observable<? extends T3> v3, Observable<? extends T4> v4, Observable<? extends T5> v5, Observable<? extends T6> v6);
+                                                                   Observable<? extends T2> v2, Observable<? extends T3> v3, Observable<? extends T4> v4,
+                                                                   Func5<? super T, ? super T1, ? super T2, ? super T3, ? super T4, ? extends R> combineFunction);
 
     public native static <T> Observable<T[]> zip(Observable<? extends T>[] values);
 
-    public native static <T1, T2, R> Observable<R> zip(Observable<? extends T1> v1, Observable<? extends T2> v2,
-            Func2<? super T1, ? super T2, ? extends R> projectFunction);
+    public native static <T, T2, R> Observable<R> zip(Observable<? extends T> v1, Observable<? extends T2> v2,
+                                                      Func2<? super T, ? super T2, ? extends R> projectFunction);
 
-    public native static <T1, T2, T3, R> Observable<R> zip(Observable<? extends T1> v1,
-            Observable<? extends T2> v2, Observable<? extends T3> v3,
-            Func3<? super T1, ? super T2, ? super T3, ? extends R> projectFunction);
+    public native static <T, T2, T3, R> Observable<R> zip(Observable<? extends T> v1,
+                                                          Observable<? extends T2> v2, Observable<? extends T3> v3,
+                                                          Func3<? super T, ? super T2, ? super T3, ? extends R> projectFunction);
 
-    public native static <T1, T2, T3, T4, R> Observable<R> zip(Observable<? extends T1> v1,
-            Observable<? extends T2> v2, Observable<? extends T3> v3, Observable<? extends T4> v4,
-            Func4<? super T1, ? super T2, ? super T3, ? super T4, ? extends R> projectFunction);
+    public native static <T, T2, T3, T4, R> Observable<R> zip(Observable<? extends T> v1,
+                                                              Observable<? extends T2> v2, Observable<? extends T3> v3, Observable<? extends T4> v4,
+                                                              Func4<? super T, ? super T2, ? super T3, ? super T4, ? extends R> projectFunction);
 
-    public native static <T1, T2, T3, T4, T5, R> Observable<R> zip(Observable<? extends T1> v1,
-            Observable<? extends T2> v2, Observable<? extends T3> v3, Observable<? extends T4> v4, Observable<? extends T5> v5,
-            Func5<? super T1, ? super T2, ? super T3, ? super T4, ? super T5, ? extends R> projectFunction);
+    public native static <T, T2, T3, T4, T5, R> Observable<R> zip(Observable<? extends T> v1,
+                                                                  Observable<? extends T2> v2, Observable<? extends T3> v3, Observable<? extends T4> v4, Observable<? extends T5> v5,
+                                                                  Func5<? super T, ? super T2, ? super T3, ? super T4, ? super T5, ? extends R> projectFunction);
 
-    public native static <T1, T2, T3, T4, T5, T6, R> Observable<R> zip(Observable<? extends T1> v1,
-            Observable<? extends T2> v2, Observable<? extends T3> v3, Observable<? extends T4> v4, Observable<? extends T5> v5, Observable<? extends T6> v6,
-            Func6<? super T1, ? super T2, ? super T3, ? super T4, ? super T5, ? super T6, ? extends R> projectFunction);
+    public native static <T, T2, T3, T4, T5, T6, R> Observable<R> zip(Observable<? extends T> v1,
+                                                                      Observable<? extends T2> v2, Observable<? extends T3> v3, Observable<? extends T4> v4, Observable<? extends T5> v5, Observable<? extends T6> v6,
+                                                                      Func6<? super T, ? super T2, ? super T3, ? super T4, ? super T5, ? super T6, ? extends R> projectFunction);
+
+
+    public native static <T> Observable<T[]> zip(Observable<? extends T> v1, Observable<? extends T> v2);
+
+    public native static <T> Observable<T[]> zip(Observable<? extends T> v1,
+                                                 Observable<? extends T> v2, Observable<? extends T> v3);
+
+    public native static <T> Observable<T[]> zip(Observable<? extends T> v1,
+                                                 Observable<? extends T> v2, Observable<? extends T> v3, Observable<? extends T> v4);
+
+    public native static <T> Observable<T[]> zip(Observable<? extends T> v1,
+                                                 Observable<? extends T> v2, Observable<? extends T> v3, Observable<? extends T> v4, Observable<? extends T> v5);
+
+    public native static <T> Observable<T[]> zip(Observable<? extends T> v1,
+                                                 Observable<? extends T> v2, Observable<? extends T> v3, Observable<? extends T> v4, Observable<? extends T> v5, Observable<? extends T> v6);
 
     public native static <T, R> Observable<R> zip(Observable<? extends T>[] values, ProjectWithArray<? extends T, ? extends R> projectFunction);
 
@@ -671,6 +677,12 @@ public class Observable<T> {
     public interface Selector<T> {
 
         Observable<T> call(Observable<T> observable);
+    }
+
+    @JsFunction
+    public interface OperatorFunction<T, R> {
+
+        Observable<? extends R> call(Observable<? super T> observable);
     }
 
     @JsFunction
