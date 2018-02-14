@@ -9,6 +9,7 @@ Supported rxjs versions list:
 
 | rxjs          | gwt-rxjs-jsinterop |
 | ------------- | ------------------ |
+| 5.5.6         | >= 1.1.7           |
 | 5.4.1         | >= 1.1.5           |
 | 5.0.3         | <= 1.1.4           |
 
