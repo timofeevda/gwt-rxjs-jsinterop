@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 ### Added
+- remove ambiguous static declarations (targeted to 6.0.0-alpha)
+- fix zip, combiteLatest declarations
+- moved to rxjs 5.5.6
 
 ## [1.1.6] - 2018-01-06
 ### Added
