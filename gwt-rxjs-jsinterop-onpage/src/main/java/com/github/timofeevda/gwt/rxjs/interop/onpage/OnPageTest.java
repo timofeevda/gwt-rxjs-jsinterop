@@ -21,6 +21,7 @@
  */
 package com.github.timofeevda.gwt.rxjs.interop.onpage;
 
+import com.github.timofeevda.gwt.rxjs.interop.observable.Observable;
 import com.github.timofeevda.gwt.rxjs.interop.observable.ObservableEx;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.Button;
@@ -45,7 +46,14 @@ public class OnPageTest implements EntryPoint {
         ObservableEx.fromMouseEvent(button.getElement(), "click")
                 .map(event -> event.clientX)
                 .take(5)
-                .subscribe(v -> log("clientX " + v));        
+                .subscribe(v -> log("clientX " + v));
+
+        Observable.from(new Integer[]{1,2,3,4,5})
+                .flatMap((item, index) -> {
+                    log("" + item);
+                    return Observable._throw(null);
+                }).retryWhen(o -> o.delay(1000))
+        .subscribe((i) -> {});
     }
 
     private static native void log(String value) /*-{
