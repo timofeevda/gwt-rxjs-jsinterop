@@ -23,6 +23,7 @@ package com.github.timofeevda.gwt.rxjs.interop.observable;
 
 import com.github.timofeevda.gwt.rxjs.interop.functions.Action0;
 import com.github.timofeevda.gwt.rxjs.interop.functions.Action1;
+import com.github.timofeevda.gwt.rxjs.interop.functions.Func0;
 import com.github.timofeevda.gwt.rxjs.interop.functions.Func1;
 import com.github.timofeevda.gwt.rxjs.interop.functions.Func2;
 import com.github.timofeevda.gwt.rxjs.interop.functions.Func3;
@@ -74,9 +75,9 @@ public class Observable<T> {
 
     public native Observable<T[]> bufferTime(int bufferTimeSpan, int bufferCreationInterval, int maxBufferSize);
 
-    public native Observable<T[]> bufferToggle(Observable openings, Observable closingsSelector);
+    public native <O> Observable<T[]> bufferToggle(Observable<O> openings, Func1<O, Observable> closingSelector);
 
-    public native Observable<T[]> bufferWhen(Observable closingSelector);
+    public native Observable<T[]> bufferWhen(Func0<Observable<?>> notifier);
 
     @JsMethod(name = "catch")
     public native <R> Observable<R> _catch(Func2<?, Observable<? super T>, Observable<? extends R>> catcher);
@@ -474,13 +475,13 @@ public class Observable<T> {
 
     public native Observable<T> repeat(int count);
 
-    public native Observable<T> repeatWhen(Observable closingNotifier);
+    public native Observable<T> repeatWhen(Func1<Observable<?>,Observable<?>> notifier);
 
     public native Observable<T> retry();
 
     public native Observable<T> retry(int count);
 
-    public native Observable<T> retryWhen(Observable closingNotifier);
+    public native Observable<T> retryWhen(Func1<Observable<?>,Observable<?>> notifier);
 
     public native Observable<T> sample(Observable notifier);
 
@@ -603,7 +604,7 @@ public class Observable<T> {
 
     public native <O> Observable<Observable<T>> windowToggle(Observable<O> openings, Func1<O, Observable> closingSelector);
 
-    public native <O> Observable<Observable<T>> windowWhen(Observable closingSelector);
+    public native Observable<Observable<T>> windowWhen(Func0<Observable<?>> notifier);
 
     public native <T1, R> Observable<R> withLatestFrom(Observable<? extends T1> v1,
                                                        Func2<? super T, ? super T1, ? extends R> combineFunction);
