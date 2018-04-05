@@ -5,6 +5,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
+
+## [1.1.8] - 2018-04-05
+### Added
+- fixed bufferWhen, delayWhen, repeatWhen, retryWhen, windowWhen signatures
+
+## [1.1.7] - 2018-02-14
 ### Added
 - remove ambiguous static declarations (targeted to 6.0.0-alpha)
 - fix zip, combiteLatest declarations
