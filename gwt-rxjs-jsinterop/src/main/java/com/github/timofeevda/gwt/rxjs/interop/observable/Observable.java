@@ -361,8 +361,6 @@ public class Observable<T> {
 
     public native <I, R> Observable<R> mergeMap(Projector<? super T, ? extends R> projector, ResultSelector<? super T, ? super I, ? extends R> resultSelector, int concurrent);
 
-    public native <R> Observable<R> flapMap(Projector<? super T, ? extends R> projector);
-
     public native <R> Observable<R> flatMap(Projector<? super T, ? extends R> projector);
 
     public native <R> Observable<R> flatMap(Projector<? super T, ? extends R> projector, int concurrent);
