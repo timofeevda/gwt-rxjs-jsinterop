@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2017 Denis Timofeev <timofeevda@gmail.com>
+ * Copyright (c) 2018 Denis Timofeev <timofeevda@gmail.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -36,6 +36,7 @@ import jsinterop.annotations.JsFunction;
  * @param <R> 
  */
 @JsFunction
+@FunctionalInterface
 public interface Func6<T1, T2, T3, T4, T5, T6, R> {
     R call(T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6);
 }

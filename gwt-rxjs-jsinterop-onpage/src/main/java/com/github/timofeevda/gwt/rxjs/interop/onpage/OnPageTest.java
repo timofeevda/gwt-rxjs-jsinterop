@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2017 Denis Timofeev <timofeevda@gmail.com>
+ * Copyright (c) 2018 Denis Timofeev <timofeevda@gmail.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -37,23 +37,24 @@ public class OnPageTest implements EntryPoint {
         RootPanel rootPanel = RootPanel.get("main");
         final Button button = new Button("Click me");
         rootPanel.add(button);
-        
+
         ObservableEx.fromKeyboardEvent(button.getElement(), "keydown")
                 .map(event -> event.ctrlKey)
                 .take(5)
                 .subscribe(v -> log("ctrlKey " + v));
-        
+
         ObservableEx.fromMouseEvent(button.getElement(), "click")
                 .map(event -> event.clientX)
                 .take(5)
                 .subscribe(v -> log("clientX " + v));
 
-        Observable.from(new Integer[]{1,2,3,4,5})
+        Observable.from(new Integer[]{1, 2, 3, 4, 5})
                 .flatMap((item, index) -> {
                     log("" + item);
                     return Observable._throw(null);
                 }).retryWhen(o -> o.delay(1000))
-        .subscribe((i) -> {});
+                .subscribe((i) -> {
+                });
     }
 
     private static native void log(String value) /*-{

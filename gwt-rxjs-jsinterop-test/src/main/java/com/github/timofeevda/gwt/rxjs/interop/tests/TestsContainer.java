@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2017 Denis Timofeev <timofeevda@gmail.com>
+ * Copyright (c) 2018 Denis Timofeev <timofeevda@gmail.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -22,6 +22,7 @@
 package com.github.timofeevda.gwt.rxjs.interop.tests;
 
 import com.github.timofeevda.gwt.rxjs.interop.functions.Action0;
+import com.github.timofeevda.gwt.rxjs.interop.functions.Func1;
 import com.github.timofeevda.gwt.rxjs.interop.observable.Observable;
 import com.github.timofeevda.gwt.rxjs.interop.observable.OnSubscribe;
 import com.github.timofeevda.gwt.rxjs.interop.observable.Subscriber;
@@ -91,7 +92,7 @@ class TestsContainer {
         Observable<String> observeStringArray = Observable.create((Subscriber<String> subscriber) -> {
             subscriber.next("1");
             subscriber.complete();
-            return subscriber::unsubscribe;
+            return subscriber;
         });
         Subscription subscription = observeStringArray.subscribe(v -> stringHolder.value += v);
         subscription.add(() -> teardownTriggered.value = true);
@@ -213,7 +214,7 @@ class TestsContainer {
     @JsMethod(name = "exhaust")
     public String testExhaust() {
         final StringHolder sh = new StringHolder();
-        Observable.of("1", "2","3").map(Observable::of).exhaust().subscribe(v -> sh.value += v);
+        Observable.of("1", "2","3").map((Func1<String, Observable<String>>) Observable::of).exhaust().subscribe(v -> sh.value += v);
         return sh.value;
     }
 

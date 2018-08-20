@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2017 Denis Timofeev <timofeevda@gmail.com>
+ * Copyright (c) 2018 Denis Timofeev <timofeevda@gmail.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -27,6 +27,7 @@ import jsinterop.annotations.JsFunction;
  * @author dtimofeev since 21.12.2016.
  */
 @JsFunction
+@FunctionalInterface
 public interface Action0 {
     void call();
 }
