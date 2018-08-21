@@ -5,7 +5,7 @@
 
 RxJS 5.x.x JavaScript interoperability bindings for GWT 2.8
 
-Supported rxjs versions list:
+Supported rxjs versions list (starting from RxJS 5.5.11 versions are synched to simplify versions mapping):
 
 | rxjs          | gwt-rxjs-jsinterop |
 | ------------- | ------------------ |
@@ -26,6 +26,11 @@ Add dependency to your pom.xml:
 Update your GWT module with the following line:
 ```xml
 <inherits name="com.github.timofeevda.gwt.rxjs.interop"/>
+```
+
+Also add following entry in gwt-maven-plugin configuration:
+```xml
+<generateJsInteropExports>true</generateJsInteropExports>
 ```
 
 Don't forget to add actual [rxjs](https://github.com/ReactiveX/rxjs) library to page resources
