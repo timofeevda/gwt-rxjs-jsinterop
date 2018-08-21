@@ -54,7 +54,7 @@ public class MethodDefinitionsTestsGenerator {
     private static final Map<String, Integer> METHOD_COUNTERS = new HashMap<>();
 
     public static void main(String... args) throws ClassNotFoundException, IOException {
-        Method[] methodDeclarations = Class.forName("com.github.timofeevda.gwt.rxjs.interop.observable.Observable")
+        Method[] methodDeclarations = Class.forName("com.github.timofeevda.gwt.rxjs.interop.RxJS")
                 .getDeclaredMethods();
 
         Set<String> importsSet = generateImportsSet(methodDeclarations);

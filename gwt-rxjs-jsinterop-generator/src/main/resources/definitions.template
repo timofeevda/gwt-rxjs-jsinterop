@@ -14,7 +14,7 @@ public class MethodsDefinitionsTest {
 <% methods.each {  %>
     @JsMethod(name="$it.uniqueMethodName")
     public boolean $it.uniqueMethodName() {
-        Observable.of(1,2,3,4).$it.originalMethodName(<% out << it.parameters.collect { value -> if(value.type == null) { "$value.value" } else {"($value.type) null" } } .join(",") %>);
+        com.github.timofeevda.gwt.rxjs.interop.RxJS.$it.originalMethodName(<% out << it.parameters.collect { value -> if(value.type == null) { "$value.value" } else {"($value.type) null" } } .join(",") %>);
         return true;
     }
 <% } %>

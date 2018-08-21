@@ -22,11 +22,11 @@
 package com.github.timofeevda.gwt.rxjs.interop.functions;
 
 import com.github.timofeevda.gwt.rxjs.interop.observable.Observable;
-import com.github.timofeevda.gwt.rxjs.interop.subscription.AnonymousSubscription;
+import com.github.timofeevda.gwt.rxjs.interop.subscription.Unsubscribable;
 import jsinterop.annotations.JsFunction;
 
 @JsFunction
 @FunctionalInterface
 public interface ObservableFactoryFromResource<T> {
-    Observable<T> call(AnonymousSubscription anonymousSubscription);
+    Observable<T> call(Unsubscribable anonymousSubscription);
 }

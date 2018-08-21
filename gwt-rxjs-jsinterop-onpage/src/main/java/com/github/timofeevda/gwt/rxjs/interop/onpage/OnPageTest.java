@@ -21,11 +21,17 @@
  */
 package com.github.timofeevda.gwt.rxjs.interop.onpage;
 
+import com.github.timofeevda.gwt.rxjs.interop.RxJS;
+import com.github.timofeevda.gwt.rxjs.interop.functions.ToObservableProjector;
 import com.github.timofeevda.gwt.rxjs.interop.observable.Observable;
 import com.github.timofeevda.gwt.rxjs.interop.observable.ObservableEx;
+import com.github.timofeevda.gwt.rxjs.interop.operators.RxJSOperators;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootPanel;
+
+import static com.github.timofeevda.gwt.rxjs.interop.operators.RxJSOperators.map;
+import static com.github.timofeevda.gwt.rxjs.interop.operators.RxJSOperators.take;
 
 /**
  * @author dtimofeev since 12/01/2017.
@@ -39,20 +45,26 @@ public class OnPageTest implements EntryPoint {
         rootPanel.add(button);
 
         ObservableEx.fromKeyboardEvent(button.getElement(), "keydown")
-                .map(event -> event.ctrlKey)
-                .take(5)
+                .pipe(
+                        map(event -> event.ctrlKey),
+                        take(5))
                 .subscribe(v -> log("ctrlKey " + v));
 
         ObservableEx.fromMouseEvent(button.getElement(), "click")
-                .map(event -> event.clientX)
-                .take(5)
+                .pipe(
+                        map(event -> event.clientX),
+                        take(5))
                 .subscribe(v -> log("clientX " + v));
 
-        Observable.from(new Integer[]{1, 2, 3, 4, 5})
-                .flatMap((item, index) -> {
-                    log("" + item);
-                    return Observable._throw(null);
-                }).retryWhen(o -> o.delay(1000))
+        RxJS.from(new Integer[]{1, 2, 3, 4, 5})
+                .pipe(RxJSOperators.flatMap(new ToObservableProjector<Integer, Object>() {
+                            @Override
+                            public Observable<Object> call(Integer t) {
+                                log("" + t);
+                                return RxJS.throwError(null);
+                            }
+                        }),
+                        RxJSOperators.retryWhen(o -> o.pipe(RxJSOperators.delay(1000))))
                 .subscribe((i) -> {
                 });
     }

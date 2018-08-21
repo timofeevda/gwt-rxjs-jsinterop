@@ -3,3 +3,4 @@
 target
 nb-configuration.xml
 *.iml
+*.versionsBackup
