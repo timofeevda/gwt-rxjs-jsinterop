@@ -30,6 +30,11 @@ Update your GWT module with the following line:
 <inherits name="com.github.timofeevda.gwt.rxjs.interop"/>
 ```
 
+Also add following entry in gwt-maven-plugin configuration:
+```xml
+<generateJsInteropExports>true</generateJsInteropExports>
+```
+
 Don't forget to add actual [rxjs](https://github.com/ReactiveX/rxjs) library to page resources
 
 **Note**: for building on Linux systems add -Dphantomjs.binary option pointing it to PhantomJS binary location. On Windows PhantomJS is installed automatically during build.
