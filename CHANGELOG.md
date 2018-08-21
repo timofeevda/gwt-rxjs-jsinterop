@@ -6,8 +6,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 ### Added
+- initial support for rxjs 6.x.x
+
+## [5.5.11] - 2018-08-21
+### Added
 - added additional declarations for various operators (pipe, forkJoin, generate etc)
 - support rxjs 5.5.11 version
+- synch rxjs version with interop library version (fixes will be tagged using additional labels, e.g. 5.5.11-1)
 
 ## [1.1.8] - 2018-04-05
 ### Added
