@@ -54,6 +54,7 @@ import com.github.timofeevda.gwt.rxjs.interop.functions.ResultSelectorWithIndex;
 import com.github.timofeevda.gwt.rxjs.interop.functions.Scanner;
 import com.github.timofeevda.gwt.rxjs.interop.functions.TransformingAccumulator;
 import com.github.timofeevda.gwt.rxjs.interop.functions.TransformingAccumulatorWithIndex;
+import com.github.timofeevda.gwt.rxjs.interop.functions.UnaryArrayFunction;
 import com.github.timofeevda.gwt.rxjs.interop.functions.UnaryFunction;
 import com.github.timofeevda.gwt.rxjs.interop.scheduler.Scheduler;
 import com.github.timofeevda.gwt.rxjs.interop.subject.Subject;
@@ -632,13 +633,13 @@ public class Observable<T> {
     public native Observable<Boolean> isEmpty();
 
     @JsMethod(name = "if")
-    public native static Observable<Boolean> _if(Func0<Boolean> condition);
+    public native static <T> Observable<T> _if(Func0<Boolean> condition);
 
     @JsMethod(name = "if")
-    public native static Observable<Boolean> _if(Func0<Boolean> condition, Observable<?> thenSource);
+    public native static <T> Observable<T> _if(Func0<Boolean> condition, Observable<? extends T> thenSource);
 
     @JsMethod(name = "if")
-    public native static Observable<Boolean> _if(Func0<Boolean> condition, Observable<?> thenSource, Observable<?> elseSource);
+    public native static <T> Observable<T> _if(Func0<Boolean> condition, Observable<? extends T> thenSource, Observable<? extends T> elseSource);
 
     public native static Observable<Integer> interval(int period);
 
@@ -977,6 +978,8 @@ public class Observable<T> {
                                                                  OperatorFunction<H, I> op9);
 
     public native <A> Observable<A> pipe(UnaryFunction<T, A> op1);
+
+    public native <A> Observable<A> pipe(UnaryArrayFunction<T, A> op1);
 
     public native <A, B> Observable<B> pipe(UnaryFunction<T, A> op1,
                                             UnaryFunction<A, B> op2);

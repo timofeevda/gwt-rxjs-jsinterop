@@ -49,6 +49,7 @@ import com.github.timofeevda.gwt.rxjs.interop.functions.ToObservableMapper;
 import com.github.timofeevda.gwt.rxjs.interop.functions.ToObservableProjector;
 import com.github.timofeevda.gwt.rxjs.interop.functions.TransformingAccumulator;
 import com.github.timofeevda.gwt.rxjs.interop.functions.TransformingAccumulatorWithIndex;
+import com.github.timofeevda.gwt.rxjs.interop.functions.UnaryArrayFunction;
 import com.github.timofeevda.gwt.rxjs.interop.functions.UnaryFunction;
 import com.github.timofeevda.gwt.rxjs.interop.observable.ConnectableObservable;
 import com.github.timofeevda.gwt.rxjs.interop.observable.GroupedObservable;
@@ -328,9 +329,9 @@ public class Operators {
     public native static <T, R> OperatorFunction<T, R> expand(Projector<? super T, ? extends R> project, int concurrent,
                                                               Scheduler scheduler);
 
-    public native static <T> Observable<T> filter(Predicate<? super T> predicate);
+    public native static <T> OperatorFunction<T, T> filter(Predicate<? super T> predicate);
 
-    public native static <T> Observable<T> filter(PredicateWithIndex<? super T> predicate);
+    public native static <T> OperatorFunction<T, T> filter(PredicateWithIndex<? super T> predicate);
 
     public native static <T> OperatorFunction<T, T> finalize(Action0 action);
 
@@ -617,9 +618,9 @@ public class Operators {
 
     public native static <T> OperatorFunction<T, T[]> pairwise();
 
-    public native static <T> UnaryFunction<Observable<T>, Observable<T>[]> partition(Predicate<? super T> predicate);
+    public native static <T> UnaryArrayFunction<T, T> partition(Predicate<? super T> predicate);
 
-    public native static <T> UnaryFunction<Observable<T>, Observable<T>[]> partition(PredicateWithIndex<? super T> predicate);
+    public native static <T> UnaryArrayFunction<T, T> partition(PredicateWithIndex<? super T> predicate);
 
     public native static <T, R> OperatorFunction<T, R> pluck(String... props);
 
