@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.github.timofeevda</groupId>
         <artifactId>gwt-rxjs-jsinterop-parent</artifactId>
-        <version>5.5.11-1-SNAPSHOT</version>
+        <version>5.5.11-2-SNAPSHOT</version>
     </parent>
 
     <artifactId>gwt-rxjs-jsinterop-onpage</artifactId>
