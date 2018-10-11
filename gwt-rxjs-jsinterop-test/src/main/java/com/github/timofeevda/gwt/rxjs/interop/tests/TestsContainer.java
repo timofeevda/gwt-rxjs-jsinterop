@@ -172,7 +172,7 @@ class TestsContainer {
     @JsMethod(name = "empty")
     public String testEmpty() {
         final StringHolder sh = new StringHolder();
-        Observable.of(1, 2, 3, 4).mergeMap((Integer item, int index) -> item % 2 == 0 ? Observable.of("1") : Observable.<String>empty()).subscribe(v -> sh.value += v);
+        Observable.of(1, 2, 3, 4).mergeMap((Integer item, Integer index) -> item % 2 == 0 ? Observable.of("1") : Observable.<String>empty()).subscribe(v -> sh.value += v);
         return sh.value;
     }
 

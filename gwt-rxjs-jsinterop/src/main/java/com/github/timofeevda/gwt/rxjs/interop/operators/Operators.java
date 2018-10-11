@@ -41,12 +41,9 @@ import com.github.timofeevda.gwt.rxjs.interop.functions.Predicate;
 import com.github.timofeevda.gwt.rxjs.interop.functions.Predicate2;
 import com.github.timofeevda.gwt.rxjs.interop.functions.PredicateWithIndex;
 import com.github.timofeevda.gwt.rxjs.interop.functions.PredicateWithSourceIndex;
-import com.github.timofeevda.gwt.rxjs.interop.functions.Projector;
 import com.github.timofeevda.gwt.rxjs.interop.functions.ResultSelector;
 import com.github.timofeevda.gwt.rxjs.interop.functions.ResultSelectorWithIndex;
 import com.github.timofeevda.gwt.rxjs.interop.functions.Scanner;
-import com.github.timofeevda.gwt.rxjs.interop.functions.ToObservableMapper;
-import com.github.timofeevda.gwt.rxjs.interop.functions.ToObservableProjector;
 import com.github.timofeevda.gwt.rxjs.interop.functions.TransformingAccumulator;
 import com.github.timofeevda.gwt.rxjs.interop.functions.TransformingAccumulatorWithIndex;
 import com.github.timofeevda.gwt.rxjs.interop.functions.UnaryArrayFunction;
@@ -232,15 +229,9 @@ public class Operators {
 
     public native static <T> OperatorFunction<T,T> concatAll();
 
-    public native static <T, R> OperatorFunction<T, R> concatMap(Func1<? super T, ? extends R> map);
+    public native static <T, R> OperatorFunction<T, R> concatMap(Func1<? super T, ? extends Observable<? extends R>> map);
 
-    public native static <T, R> OperatorFunction<T, R> concatMap(Projector<? super T, ? extends R> project);
-
-    public native static <T, I, R> OperatorFunction<T, R> concatMap(ToObservableMapper<? super T, ? extends I> mapper,
-                                                                    ResultSelector<? super T, ? super I, ? extends R> resultSelector);
-
-    public native static <T, I, R> OperatorFunction<T, R> concatMap(ToObservableProjector<? super T, ? extends I> project,
-                                                                    ResultSelector<? super T, ? super I, R> resultSelector);
+    public native static <T, R> OperatorFunction<T, R> concatMap(Func2<? super T, Integer, ? extends Observable<? extends R>> project);
 
     public native static <T, R> OperatorFunction<T, R> concatMapTo(Observable<? extends R> observable);
 
@@ -305,28 +296,28 @@ public class Operators {
 
     public native static <T> OperatorFunction<T, T> exhaust();
 
-    public native static <T, R> OperatorFunction<T, R> exhaustMap(Func1<? super T, ? extends R> mapper);
+    public native static <T, R> OperatorFunction<T, R> exhaustMap(Func1<? super T, ? extends Observable<? extends R>> mapper);
 
-    public native static <T, R> OperatorFunction<T, R> exhaustMap(Projector<? super T, ? extends R> project);
+    public native static <T, R> OperatorFunction<T, R> exhaustMap(Func2<? super T, Integer, ? extends Observable<? extends R>> project);
 
-    public native static <T, I, R> OperatorFunction<T, R> exhaustMap(Func1<? super T, ? extends I> mapper,
+    public native static <T, I, R> OperatorFunction<T, R> exhaustMap(Func1<? super T, ? extends Observable<? extends I>> mapper,
                                                                      ResultSelector<? super T, ? super I, ? extends R> resultSelector);
 
-    public native static <T, I, R> OperatorFunction<T, R> exhaustMap(Projector<? super T, ? extends I> project,
+    public native static <T, I, R> OperatorFunction<T, R> exhaustMap(Func2<? super T, Integer, ? extends Observable<? extends R>> project,
                                                                      ResultSelector<? super T, ? super I, ? extends R> resultSelector);
 
-    public native static <T, R> OperatorFunction<T, R> expand(Func1<? super T, ? extends R> mapper);
+    public native static <T, R> OperatorFunction<T, R> expand(Func1<? super T, ? extends Observable<? extends R>> mapper);
 
-    public native static <T, R> OperatorFunction<T, R> expand(Projector<? super T, ? extends R> project);
+    public native static <T, R> OperatorFunction<T, R> expand(Func2<? super T, Integer, ? extends Observable<? extends R>> project);
 
-    public native static <T, R> OperatorFunction<T, R> expand(Func1<? super T, ? extends R> mapper, int concurrent);
+    public native static <T, R> OperatorFunction<T, R> expand(Func1<? super T, ? extends Observable<? extends R>> mapper, int concurrent);
 
-    public native static <T, R> OperatorFunction<T, R> expand(Projector<? super T, ? extends R> project, int concurrent);
+    public native static <T, R> OperatorFunction<T, R> expand(Func2<? super T, Integer, ? extends Observable<? extends R>> project, int concurrent);
 
-    public native static <T, R> OperatorFunction<T, R> expand(Func1<? super T, ? extends R> mapper, int concurrent,
+    public native static <T, R> OperatorFunction<T, R> expand(Func1<? super T, ? extends Observable<? extends R>> mapper, int concurrent,
                                                               Scheduler scheduler);
 
-    public native static <T, R> OperatorFunction<T, R> expand(Projector<? super T, ? extends R> project, int concurrent,
+    public native static <T, R> OperatorFunction<T, R> expand(Func2<? super T, Integer, ? extends Observable<? extends R>> project, int concurrent,
                                                               Scheduler scheduler);
 
     public native static <T> OperatorFunction<T, T> filter(Predicate<? super T> predicate);
@@ -429,7 +420,7 @@ public class Operators {
 
     public native static <T, R> OperatorFunction<T, R> map(Func1<? super T, ? extends R> mapper);
 
-    public native static <T, R> OperatorFunction<T, R> map(Projector<? super T, ? extends R> project);
+    public native static <T, R> OperatorFunction<T, R> map(Func2<? super T, Integer, ? extends R> project);
 
     public native static <T, R> OperatorFunction<T, R> mapTo(R value);
 
@@ -528,15 +519,15 @@ public class Operators {
 
     public native static <T> OperatorFunction<T,T> mergeAll(int concurrent);
 
-    public native static <T, R> OperatorFunction<T, R> mergeMap(ToObservableMapper<? super T, ? extends R> mapper);
+    public native static <T, R> OperatorFunction<T, R> mergeMap(Func1<? super T, ? extends Observable<? extends R>> mapper);
 
-    public native static <T, R> OperatorFunction<T, R> mergeMap(ToObservableProjector<? super T, ? extends R> project);
-
-    @JsMethod(name = "mergeMap")
-    public native static <T, R> OperatorFunction<T, R> flatMap(ToObservableMapper<? super T, ? extends R> mapper);
+    public native static <T, R> OperatorFunction<T, R> mergeMap(Func2<? super T, Integer, ? extends Observable<? extends R>> project);
 
     @JsMethod(name = "mergeMap")
-    public native static <T, R> OperatorFunction<T, R> flatMap(ToObservableProjector<? super T, ? extends R> project);
+    public native static <T, R> OperatorFunction<T, R> flatMap(Func1<? super T, ? extends Observable<? extends R>> mapper);
+
+    @JsMethod(name = "mergeMap")
+    public native static <T, R> OperatorFunction<T, R> flatMap(Func2<? super T, Integer, ? extends Observable<? extends R>> project);
 
     public native static <T, R> OperatorFunction<T, R> mergeMapTo(Observable<? extends R> observable);
 
@@ -784,14 +775,14 @@ public class Operators {
 
     public native static <T> OperatorFunction<Observable<T>, T> switchAll();
 
-    public native static <T, R> OperatorFunction<T, R> switchMap(Func1<? super T, ? extends R> mapper);
+    public native static <T, R> OperatorFunction<T, R> switchMap(Func1<? super T, ? extends Observable<? extends R>> mapper);
 
-    public native static <T, R> OperatorFunction<T, R> switchMap(Projector<? super T, ? extends R> project);
+    public native static <T, R> OperatorFunction<T, R> switchMap(Func2<? super T, Integer, ? extends Observable<? extends R>> project);
 
-    public native static <T, I, R> OperatorFunction<T, R> switchMap(Func1<? super T, ? extends I> mapper,
+    public native static <T, I, R> OperatorFunction<T, R> switchMap(Func1<? super T, ? extends Observable<? extends I>> mapper,
                                                                     ResultSelector<? super T, ? super I, ? extends R> resultSelector);
 
-    public native static <T, I, R> OperatorFunction<T, R> switchMap(Projector<? super T, ? extends I> project,
+    public native static <T, I, R> OperatorFunction<T, R> switchMap(Func2<? super T, Integer, ? extends Observable<? extends I>> project,
                                                                     ResultSelector<? super T, ? super I, ? extends R> resultSelector);
 
     public native static <T, R> OperatorFunction<T, R> switchMapTo(Observable<? extends R> observable);
