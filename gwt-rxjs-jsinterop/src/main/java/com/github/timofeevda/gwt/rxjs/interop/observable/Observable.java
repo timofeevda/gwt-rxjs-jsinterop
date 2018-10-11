@@ -47,13 +47,13 @@ import com.github.timofeevda.gwt.rxjs.interop.functions.Predicate;
 import com.github.timofeevda.gwt.rxjs.interop.functions.Predicate2;
 import com.github.timofeevda.gwt.rxjs.interop.functions.PredicateWithIndex;
 import com.github.timofeevda.gwt.rxjs.interop.functions.PredicateWithSourceIndex;
-import com.github.timofeevda.gwt.rxjs.interop.functions.Projector;
 import com.github.timofeevda.gwt.rxjs.interop.functions.ResultFunc;
 import com.github.timofeevda.gwt.rxjs.interop.functions.ResultSelector;
 import com.github.timofeevda.gwt.rxjs.interop.functions.ResultSelectorWithIndex;
 import com.github.timofeevda.gwt.rxjs.interop.functions.Scanner;
 import com.github.timofeevda.gwt.rxjs.interop.functions.TransformingAccumulator;
 import com.github.timofeevda.gwt.rxjs.interop.functions.TransformingAccumulatorWithIndex;
+import com.github.timofeevda.gwt.rxjs.interop.functions.UnaryArrayFunction;
 import com.github.timofeevda.gwt.rxjs.interop.functions.UnaryFunction;
 import com.github.timofeevda.gwt.rxjs.interop.scheduler.Scheduler;
 import com.github.timofeevda.gwt.rxjs.interop.subject.Subject;
@@ -457,23 +457,14 @@ public class Observable<T> {
                                                   Observable<? extends T> v6,
                                                   Scheduler scheduler);
 
-    @SafeVarargs
-    public native static <T> Observable<T> concat(Observable<? extends T>... observables);
+    public native <R> Observable<R> concatMap(Func1<? super T, ? extends Observable<? extends R>> mapper);
 
-    public native static <T> Observable<T> concat(Observable<? extends T>[] observables, Scheduler scheduler);
-
-    public native static <T> Observable<T> concat(Iterable<Observable<T>> observables);
-
-    public native static <T> Observable<T> concat(Iterable<Observable<T>> observables, Scheduler scheduler);
-
-    public native <R> Observable<R> concatMap(Func1<? super T, ? extends R> mapper);
-
-    public native <R> Observable<R> concatMap(Projector<? super T, ? extends R> projector);
+    public native <R> Observable<R> concatMap(Func2<? super T, Integer, ? extends Observable<? extends R>> mapperWithIndex);
 
     public native <I, R> Observable<T> concatMap(Func1<? super T, ? extends I> mapper,
                                                  ResultSelector<? super T, ? super I, ? extends R> resultSelector);
 
-    public native <I, R> Observable<T> concatMap(Projector<? super T, ? extends I> projector,
+    public native <I, R> Observable<T> concatMap(Func2<? super T, Integer, ? extends Observable<? extends I>> mapperWithIndex,
                                                  ResultSelector<? super T, ? super I, ? extends R> resultSelector);
 
     public native <R> Observable<R> concatMapTo(Observable<? extends R> observable);
@@ -556,27 +547,27 @@ public class Observable<T> {
 
     public native Observable<T> exhaust();
 
-    public native <R> Observable<T> exhaustMap(Func1<? super T, ? extends R> mapper);
+    public native <R> Observable<T> exhaustMap(Func1<? super T, ? extends Observable<? extends R>> mapper);
 
-    public native <R> Observable<T> exhaustMap(Projector<? super T, ? extends R> projector);
+    public native <R> Observable<T> exhaustMap(Func2<? super T, Integer, ? extends Observable<? extends R>> projector);
 
-    public native <I, R> Observable<T> exhaustMap(Func1<? super T, ? extends I> mapper,
+    public native <I, R> Observable<T> exhaustMap(Func1<? super T, ? extends Observable<? extends I>> mapper,
                                                   ResultSelector<? super T, ? super I, ? extends R> resultSelector);
 
-    public native <I, R> Observable<T> exhaustMap(Projector<? super T, ? extends I> projector,
+    public native <I, R> Observable<T> exhaustMap(Func2<? super T, Integer, ? extends Observable<? extends R>> projector,
                                                   ResultSelector<? super T, ? super I, ? extends R> resultSelector);
 
-    public native <R> Observable<R> expand(Func1<? super T, ? extends R> mapper);
+    public native <R> Observable<R> expand(Func1<? super T, ? extends Observable<? extends R>> mapper);
 
-    public native <R> Observable<R> expand(Projector<? super T, ? extends R> projector);
+    public native <R> Observable<R> expand(Func2<? super T, Integer, ? extends Observable<? extends R>> projector);
 
-    public native <R> Observable<R> expand(Func1<? super T, ? extends R> mapper, int concurrent);
+    public native <R> Observable<R> expand(Func1<? super T, ? extends Observable<? extends R>> mapper, int concurrent);
 
-    public native <R> Observable<R> expand(Projector<? super T, ? extends R> projector, int concurrent);
+    public native <R> Observable<R> expand(Func2<? super T, Integer, ? extends Observable<? extends R>> projector, int concurrent);
 
-    public native <R> Observable<R> expand(Func1<? super T, ? extends R> mapper, int concurrent, Scheduler scheduler);
+    public native <R> Observable<R> expand(Func1<? super T, ? extends Observable<? extends R>> mapper, int concurrent, Scheduler scheduler);
 
-    public native <R> Observable<R> expand(Projector<? super T, ? extends R> projector, int concurrent, Scheduler scheduler);
+    public native <R> Observable<R> expand(Func2<? super T, Integer, ? extends Observable<? extends R>> projector, int concurrent, Scheduler scheduler);
 
     public native Observable<T> filter(Predicate<? super T> predicate);
 
@@ -632,13 +623,13 @@ public class Observable<T> {
     public native Observable<Boolean> isEmpty();
 
     @JsMethod(name = "if")
-    public native static Observable<Boolean> _if(Func0<Boolean> condition);
+    public native static <T> Observable<T> _if(Func0<Boolean> condition);
 
     @JsMethod(name = "if")
-    public native static Observable<Boolean> _if(Func0<Boolean> condition, Observable<?> thenSource);
+    public native static <T> Observable<T> _if(Func0<Boolean> condition, Observable<? extends T> thenSource);
 
     @JsMethod(name = "if")
-    public native static Observable<Boolean> _if(Func0<Boolean> condition, Observable<?> thenSource, Observable<?> elseSource);
+    public native static <T> Observable<T> _if(Func0<Boolean> condition, Observable<? extends T> thenSource, Observable<? extends T> elseSource);
 
     public native static Observable<Integer> interval(int period);
 
@@ -671,7 +662,7 @@ public class Observable<T> {
 
     public native <R> Observable<R> map(Func1<? super T, ? extends R> mapper);
 
-    public native <R> Observable<R> map(Projector<? super T, ? extends R> project);
+    public native <R> Observable<R> map(Func2<? super T, Integer, ? extends R> project);
 
     public native <R> Observable<R> mapTo(R value);
 
@@ -778,55 +769,55 @@ public class Observable<T> {
 
     public native Observable<T> mergeAll(int concurrent);
 
-    public native <R> Observable<R> mergeMap(Func1<? super T, ? extends R> mapper);
+    public native <R> Observable<R> mergeMap(Func1<? super T, ? extends Observable<? extends R>> mapper);
 
-    public native <R> Observable<R> mergeMap(Projector<? super T, ? extends R> projector);
+    public native <R> Observable<R> mergeMap(Func2<? super T, Integer, ? extends Observable<? extends R>> mapperWithIndex);
 
-    public native <R> Observable<R> mergeMap(Func1<? super T, ? extends R> mapper, int concurrent);
+    public native <R> Observable<R> mergeMap(Func1<? super T, ? extends Observable<? extends R>> mapper, int concurrent);
 
-    public native <R> Observable<R> mergeMap(Projector<? super T, ? extends R> projector, int concurrent);
+    public native <R> Observable<R> mergeMap(Func2<? super T, Integer, ? extends Observable<? extends R>> projector, int concurrent);
 
-    public native <I, R> Observable<R> mergeMap(Func1<? super T, ? extends R> mapper,
+    public native <I, R> Observable<R> mergeMap(Func1<? super T, ? extends Observable<? extends R>> mapper,
                                                 ResultSelector<? super T, ? super I, ? extends R> resultSelector);
 
-    public native <I, R> Observable<R> mergeMap(Projector<? super T, ? extends R> projector,
+    public native <I, R> Observable<R> mergeMap(Func2<? super T, Integer, ? extends Observable<? extends R>> projector,
                                                 ResultSelector<? super T, ? super I, ? extends R> resultSelector);
 
-    public native <I, R> Observable<R> mergeMap(Func1<? super T, ? extends R> mapper,
+    public native <I, R> Observable<R> mergeMap(Func1<? super T, ? extends Observable<? extends R>> mapper,
                                                 ResultSelector<? super T, ? super I, ? extends R> resultSelector,
                                                 int concurrent);
 
-    public native <I, R> Observable<R> mergeMap(Projector<? super T, ? extends R> projector,
+    public native <I, R> Observable<R> mergeMap(Func2<? super T, Integer, ? extends Observable<? extends R>> projector,
                                                 ResultSelector<? super T, ? super I, ? extends R> resultSelector,
                                                 int concurrent);
 
     @JsMethod(name = "mergeMap")
-    public native <R> Observable<R> flatMap(Func1<? super T, ? extends R> mapper);
+    public native <R> Observable<R> flatMap(Func1<? super T, ? extends Observable<? extends R>> mapper);
 
     @JsMethod(name = "mergeMap")
-    public native <R> Observable<R> flatMap(Projector<? super T, ? extends R> projector);
+    public native <R> Observable<R> flatMap(Func2<? super T, Integer, ? extends Observable<? extends R>> mapperWithIndex);
 
     @JsMethod(name = "mergeMap")
-    public native <R> Observable<R> flatMap(Func1<? super T, ? extends R> mapper, int concurrent);
+    public native <R> Observable<R> flatMap(Func1<? super T, ? extends Observable<? extends R>> mapper, int concurrent);
 
     @JsMethod(name = "mergeMap")
-    public native <R> Observable<R> flatMap(Projector<? super T, ? extends R> projector, int concurrent);
+    public native <R> Observable<R> flatMap(Func2<? super T, Integer, ? extends Observable<? extends R>> projector, int concurrent);
 
     @JsMethod(name = "mergeMap")
-    public native <I, R> Observable<R> flatMap(Projector<? super T, ? extends R> projector,
+    public native <I, R> Observable<R> flatMap(Func2<? super T, Integer, ? extends Observable<? extends R>> projector,
                                                ResultSelector<? super T, ? super I, ? extends R> resultSelector);
 
     @JsMethod(name = "mergeMap")
-    public native <I, R> Observable<R> flatMap(Func1<? super T, ? extends R> mapper,
+    public native <I, R> Observable<R> flatMap(Func1<? super T, ? extends Observable<? extends R>> mapper,
                                                ResultSelector<? super T, ? super I, ? extends R> resultSelector);
 
     @JsMethod(name = "mergeMap")
-    public native <I, R> Observable<R> flatMap(Func1<? super T, ? extends R> mapper,
+    public native <I, R> Observable<R> flatMap(Func1<? super T, ? extends Observable<? extends R>> mapper,
                                                ResultSelector<? super T, ? super I, ? extends R> resultSelector,
                                                int concurrent);
 
     @JsMethod(name = "mergeMap")
-    public native <I, R> Observable<R> flatMap(Projector<? super T, ? extends R> projector,
+    public native <I, R> Observable<R> flatMap(Func2<? super T, Integer, ? extends Observable<? extends R>> projector,
                                                ResultSelector<? super T, ? super I, ? extends R> resultSelector,
                                                int concurrent);
 
@@ -977,6 +968,8 @@ public class Observable<T> {
                                                                  OperatorFunction<H, I> op9);
 
     public native <A> Observable<A> pipe(UnaryFunction<T, A> op1);
+
+    public native <A> Observable<A> pipe(UnaryArrayFunction<T, A> op1);
 
     public native <A, B> Observable<B> pipe(UnaryFunction<T, A> op1,
                                             UnaryFunction<A, B> op2);
@@ -1429,14 +1422,14 @@ public class Observable<T> {
     @JsMethod(name = "switch")
     public native Observable<T> _switch();
 
-    public native <R> Observable<R> switchMap(Func1<? super T, ? extends R> mapper);
+    public native <R> Observable<R> switchMap(Func1<? super T, ? extends Observable<? extends R>> mapper);
 
-    public native <R> Observable<R> switchMap(Projector<? super T, ? extends R> project);
+    public native <R> Observable<R> switchMap(Func2<? super T, Integer, ? extends Observable<? extends R>> project);
 
-    public native <I, R> Observable<R> switchMap(Func1<? super T, ? extends I> mapper,
+    public native <I, R> Observable<R> switchMap(Func1<? super T, ? extends Observable<? extends I>> mapper,
                                                  ResultSelector<? super T, ? super I, ? extends R> resultSelector);
 
-    public native <I, R> Observable<R> switchMap(Projector<? super T, ? extends I> project,
+    public native <I, R> Observable<R> switchMap(Func2<? super T, Integer, ? extends Observable<? extends R>> project,
                                                  ResultSelector<? super T, ? super I, ? extends R> resultSelector);
 
     public native <I, R> Observable<R> switchMapTo(Observable<? extends I> observable,

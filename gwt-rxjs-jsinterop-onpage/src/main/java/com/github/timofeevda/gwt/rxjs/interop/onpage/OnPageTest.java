@@ -21,6 +21,7 @@
  */
 package com.github.timofeevda.gwt.rxjs.interop.onpage;
 
+import com.github.timofeevda.gwt.rxjs.interop.functions.Func1;
 import com.github.timofeevda.gwt.rxjs.interop.observable.Observable;
 import com.github.timofeevda.gwt.rxjs.interop.observable.ObservableEx;
 import com.google.gwt.core.client.EntryPoint;
