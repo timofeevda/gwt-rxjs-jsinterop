@@ -3,6 +3,8 @@
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.timofeevda/gwt-rxjs-jsinterop/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.timofeevda/gwt-rxjs-jsinterop)
 
 
+RxJS 6.x.x JavaScript interoperability bindings see at [master](https://github.com/timofeevda/gwt-rxjs-jsinterop/tree/master) branch
+
 RxJS 5.x.x JavaScript interoperability bindings for GWT 2.8
 
 Supported rxjs versions list (starting from RxJS 5.5.11 versions are synched to simplify versions mapping):
