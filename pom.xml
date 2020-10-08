@@ -4,7 +4,7 @@
 	
     <groupId>com.github.timofeevda</groupId>
     <artifactId>gwt-rxjs-jsinterop-parent</artifactId>
-    <version>5.5.11-2-SNAPSHOT</version>
+    <version>5.5.11-2</version>
 		
     <packaging>pom</packaging>
         
@@ -65,7 +65,7 @@
         <url>https://github.com/timofeevda/gwt-rxjs-jsinterop</url>
         <connection>scm:git:git@github.com:timofeevda/gwt-rxjs-jsinterop.git</connection>
         <developerConnection>scm:git:git@github.com:timofeevda/gwt-rxjs-jsinterop.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>gwt-rxjs-jsinterop-parent-5.5.11-2</tag>
     </scm>
     
     <profiles>
