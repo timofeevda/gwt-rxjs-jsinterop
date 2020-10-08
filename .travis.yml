@@ -2,4 +2,4 @@ sudo: required
 language: java
 script: mvn test -Ptravis-ci
 jdk:
-  - oraclejdk8
+  - openjdk8
