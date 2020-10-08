@@ -9,13 +9,13 @@
     </parent>
 
     <artifactId>gwt-rxjs-jsinterop</artifactId>
-    
+
     <name>GWT RxJs JsInterop</name>
     <url>https://github.com/timofeevda/gwt-rxjs-jsinterop</url>
-    
+
     <packaging>jar</packaging>
-    
-    <build>        
+
+    <build>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
@@ -29,24 +29,14 @@
             </resource>
         </resources>
     </build>
-    
+
     <dependencies>
-        <dependency>
-            <groupId>com.google.jsinterop</groupId>
-            <artifactId>jsinterop-annotations</artifactId>
-            <version>${jsinterop.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.jsinterop</groupId>
-            <artifactId>jsinterop-annotations</artifactId>
-            <version>${jsinterop.version}</version>
-            <classifier>sources</classifier>
-        </dependency>
         <dependency>
             <groupId>com.google.gwt</groupId>
             <artifactId>gwt-user</artifactId>
             <version>${gwt.version}</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
-    
+
 </project>

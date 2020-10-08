@@ -1,10 +1,5 @@
 sudo: required
 language: java
-script: mvn test -Ptravis-ci -Dphantomjs.binary=/usr/local/phantomjs/bin/phantomjs
+script: mvn test -Ptravis-ci
 jdk:
   - oraclejdk8
-before_install:
-  - wget https://s3.amazonaws.com/travis-phantomjs/phantomjs-2.0.0-ubuntu-14.04.tar.bz2
-  - tar -xjf phantomjs-2.0.0-ubuntu-14.04.tar.bz2
-  - sudo rm -rf /usr/local/phantomjs/bin/phantomjs
-  - sudo mv phantomjs /usr/local/phantomjs/bin/phantomjs

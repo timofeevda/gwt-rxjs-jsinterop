@@ -22,13 +22,14 @@
 package com.github.timofeevda.gwt.rxjs.interop.event;
 
 import com.google.gwt.dom.client.Element;
+import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 /**
  *
  * @author timofeevda since 12/01/2017
  */
-@JsType(isNative = true)
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class MouseEvent extends Event {    
     public boolean altKey;
     public int button;
