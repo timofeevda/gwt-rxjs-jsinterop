@@ -3,9 +3,9 @@
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.timofeevda/gwt-rxjs-jsinterop/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.timofeevda/gwt-rxjs-jsinterop)
 
 
-RxJS 5.x.x JavaScript interoperability bindings for GWT 2.8
+RxJS 5.x.x JavaScript interoperability bindings for GWT 2.8/2.9
 
-Supported rxjs versions list (starting from RxJS 5.5.11 versions are synched to simplify versions mapping):
+Supported rxjs versions list (starting from RxJS 5.5.11 versions are synced to simplify versions mapping):
 
 | rxjs          | gwt-rxjs-jsinterop |
 | ------------- | ------------------ |
@@ -14,7 +14,17 @@ Supported rxjs versions list (starting from RxJS 5.5.11 versions are synched to 
 | 5.4.1         | >= 1.1.5           |
 | 5.0.3         | <= 1.1.4           |
 
-Add dependency to your pom.xml:
+Add dependency to your pom.xml for GWT 2.8.x and optionally dependency to jsinterop-annotations:
+:
+```xml
+<dependency>
+    <groupId>com.github.timofeevda</groupId>
+    <artifactId>gwt-rxjs-jsinterop</artifactId>
+    <version>${version}</version>
+</dependency>
+```
+
+Add dependency to your pom.xml for GWT 2.9.x and optionally dependency to jsinterop-annotations:
 ```xml
 <dependency>
     <groupId>com.github.timofeevda</groupId>
@@ -34,7 +44,4 @@ Also add following entry in gwt-maven-plugin configuration:
 ```
 
 Don't forget to add actual [rxjs](https://github.com/ReactiveX/rxjs) library to page resources
-
-**Note**: for building on Linux systems add -Dphantomjs.binary option pointing it to PhantomJS binary location. On Windows PhantomJS is installed automatically during build.
-
 

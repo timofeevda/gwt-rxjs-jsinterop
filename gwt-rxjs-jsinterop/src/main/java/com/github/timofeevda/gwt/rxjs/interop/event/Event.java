@@ -21,6 +21,7 @@
  */
 package com.github.timofeevda.gwt.rxjs.interop.event;
 
+import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 import com.google.gwt.dom.client.Element;
 
@@ -28,7 +29,7 @@ import com.google.gwt.dom.client.Element;
  *
  * @author timofeevda since 12/01/2017
  */
-@JsType(isNative = true)
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public class Event {
     public boolean bubbles;
     public boolean cancelable;
