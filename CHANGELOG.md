@@ -4,7 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) 
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## Unreleased
+## [5.5.11-1] - 2018-10-11
+### Added
+- removed incorrect concat operator bingings with arrays
+- reworked generics in different versions of xxxMap operators
+- fixed declarations in map/flatMap operators
 
 ## [5.5.11] - 2018-08-21
 ### Added
